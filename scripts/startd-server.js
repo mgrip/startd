@@ -5,10 +5,11 @@ import App from '../src/App.js'
 import { StaticRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import socketIO from 'socket.io'
 
 const store = createStore((state = {}) => state)
 
-express()
+const server = express()
   .use(express.static('public'))
   .get('*', (req, res) => {
     res.status(200).send(`<!doctype html><html lang="en">
@@ -18,14 +19,25 @@ express()
         <script type="text/javascript" src="startd.bundle.js"></script>
       </head>
       <body>
-        ${renderToString(<Provider store={store}>
-            <div id="root">
+        <div id="root">
+          ${renderToString(
+            <Provider store={store}>
               <StaticRouter location={req.url} context={{}}>
                 <App />
               </StaticRouter>
-            </div>
-          </Provider>)}
+            </Provider>
+          )}
+        </div>
       </body>
     </html>`)
   })
   .listen(process.env.PORT || 3000)
+
+const io = socketIO(server, { serveClient: false })
+
+io.on('connection', socket => {
+  console.log('hi client connected')
+  socket.on('disconnect', () => {
+    console.log('client disconnect')
+  })
+})

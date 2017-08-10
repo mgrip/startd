@@ -15,15 +15,22 @@
     "babel-preset-stage-1": "^6.24.1",
     "domready": "^1.0.8",
     "express": "^4.15.2",
+    "http-proxy-middleware": "^0.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.7",
     "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-act": "^1.2.0",
-    "styled-jsx": "^0.5.7",
-    "webpack": "^2.5.1"
+    "socket.io": "^2.0.1",
+    "styled-components": "^2.1.2",
+    "webpack": "^2.5.1",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-dev-server": "^2.6.1",
+    "webpack-format-messages": "^1.0.0",
+    "webpack-hot-middleware": "^2.18.2"
   },
   "scripts": {
     "start": "node ./scripts/startd.js"

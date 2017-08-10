@@ -1,19 +1,10 @@
 import React from 'react'
-import { colors, borderWeight, borderRadius, spacing } from '../../theme'
 
-const Checkbox = ({ children, onClick }) => (
+const Select = ({ children, onClick }) =>
   <section>
-    <section>{children}</section>
-    <style jsx>{`
-        .button {
-          background: ${colors.primary};
-          border: ${borderWeight.normal} solid ${colors.primary};
-          border-radius: ${borderRadius.medium};
-          padding: ${spacing.medium};
-          cursor: pointer;
-        }
-      `}</style>
+    <section>
+      {children}
+    </section>
   </section>
-)
 
-export default Card;
+export default Select

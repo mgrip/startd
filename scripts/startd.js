@@ -1,12 +1,23 @@
 const webpack = require('webpack')
 const path = require('path')
-const spawn = require('child_process').spawn
+const fork = require('child_process').fork
+const express = require('express')
+const WebpackDevServer = require('webpack-dev-server')
+const formatWebpackMessages = require('webpack-format-messages')
+
+const publicPath = path.resolve(process.cwd(), 'public')
+const scriptsPath = path.resolve(process.cwd(), 'scripts')
+const serverEntry = 'startd-server.js'
+const clientEntry = 'startd-client.js'
+const serverBundle = 'startd-server.bundle.js'
+const clientBundle = 'startd.bundle.js'
+const port = process.env.PORT || 3000
+const hotModuleReplacementPort = 8000
 
 let server = null
 const refresh = () => {
   if (server) server.kill()
-  const serverPath = path.resolve(__dirname, 'startd-server.bundle.js')
-  server = spawn('node', [serverPath], { stdio: 'inherit', env: process.env })
+  server = fork(path.resolve(publicPath, serverBundle))
   console.log('Restarted the server')
 }
 
@@ -23,7 +34,7 @@ const config = {
             'babel-preset-stage-1',
             'babel-preset-react'
           ],
-          plugins: ['styled-jsx/babel']
+          plugins: ['react-hot-loader/babel']
         }
       }
     ]
@@ -31,35 +42,87 @@ const config = {
   devtool: 'eval'
 }
 
-const compiler = webpack([
-  Object.assign({}, config, {
-    entry: path.resolve(process.cwd(), './scripts/startd-server.js'),
-    output: {
-      path: path.resolve(__dirname),
-      filename: 'startd-server.bundle.js'
-    },
-    target: 'node'
-  }),
-  Object.assign({}, config, {
-    entry: path.resolve(process.cwd(), './scripts/startd-client.js'),
-    output: {
-      path: path.resolve(__dirname, '..', 'public'),
-      filename: 'startd.bundle.js'
-    }
-  })
-])
+const serverConfig = Object.assign({}, config, {
+  entry: path.resolve(scriptsPath, serverEntry),
+  output: {
+    path: publicPath,
+    filename: serverBundle
+  },
+  target: 'node'
+})
+const clientConfig = Object.assign({}, config, {
+  entry: [
+    'react-hot-loader/patch',
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:' + hotModuleReplacementPort,
+    path.resolve(scriptsPath, clientEntry)
+  ],
+  output: {
+    path: publicPath,
+    filename: clientBundle
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
+  ]
+})
 
 let production = false
 process.argv.forEach(function(val, index, array) {
   if (val === '--prod') production = true
 })
 
+const outputMessages = stats => {
+  const messages = formatWebpackMessages(stats)
+
+  if (!messages.errors.length && !messages.warnings.length) {
+    console.log('Compiled successfully!')
+  }
+
+  if (messages.errors.length) {
+    console.log('Failed to compile.')
+    messages.errors.forEach(e => console.log(e))
+    return
+  }
+
+  if (messages.warnings.length) {
+    console.log('Compiled with warnings.')
+    messages.warnings.forEach(w => console.log(w))
+  }
+}
+
+const createCompiler = config => {
+  const compiler = webpack(config)
+  compiler.plugin('invalid', () => console.log('Compiling...'))
+  compiler.plugin('done', stats => outputMessages(stats))
+  return compiler
+}
+
 if (production) {
-  compiler.run(err => {
+  webpack([serverConfig, clientConfig]).run(err => {
     refresh()
   })
 } else {
-  compiler.watch({}, (err, stats) => {
+  const server = new WebpackDevServer(createCompiler(clientConfig), {
+    contentBase: publicPath,
+    publicPath: '/',
+    hot: true,
+    inline: true,
+    proxy: {
+      '*': {
+        target: 'http://localhost:' + port + '/',
+        bypass: function(req, res, proxyOptions) {
+          if (
+            req.path === '/startd.bundle.js' ||
+            req.path.indexOf('hot-update') > -1
+          ) {
+            return false
+          }
+        }
+      }
+    }
+  }).listen(hotModuleReplacementPort)
+  createCompiler(serverConfig).watch({}, err => {
     refresh()
   })
 }

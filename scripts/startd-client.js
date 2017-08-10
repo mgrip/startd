@@ -1,10 +1,12 @@
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 import App from '../src/App.js'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
 import { reducer as counterReducer } from '../src/reducers/counter'
+import io from 'socket.io-client'
+import { AppContainer } from 'react-hot-loader'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -15,11 +17,32 @@ const store = createStore(
   composeEnhancers()
 )
 
-document.addEventListener('DOMContentLoaded', event => {
-  render(
-    <Provider store={store}>
-      <BrowserRouter><App /></BrowserRouter>
-    </Provider>,
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>
+    </AppContainer>,
     document.getElementById('root')
   )
+}
+
+document.addEventListener('DOMContentLoaded', event => {
+  render(App)
+})
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('../src/App.js', () => {
+    const NextApp = require('../src/App.js').default
+    render(NextApp)
+  })
+}
+
+var socket = io()
+socket.on('connection', () => {
+  console.log('connected to startd server')
 })
