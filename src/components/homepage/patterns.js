@@ -5,13 +5,12 @@ import Checkbox from '../patterns/checkbox'
 import Input from '../patterns/input'
 import Select from '../patterns/select'
 
-const Patterns = () => (
+const Patterns = () =>
   <section>
-    <Button />
+    <Button>Test Button</Button>
     <Card />
-    <Checkbox />
+    <Checkbox checked={true} />
     <Input />
     <Select />
   </section>
-)
 export default Patterns

@@ -35,7 +35,7 @@ export default {
     lightPrimary: 'red',
     darkPrimary: 'grey',
 
-    secondary: '',
+    secondary: 'red',
     lightSecondary: '',
     darkSecondary: '',
 

@@ -1,10 +1,14 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Button = ({ children, onClick }) =>
-  <span>
-    <span className="button" role="button" onClick={onClick}>
-      {children}
-    </span>
-  </span>
-
-export default Button
+export default styled.button`
+  color: ${props => props.theme.colors.secondary};
+  background-color: ${props => props.theme.colors.primary};
+  font-family: ${props => props.theme.font.family}
+  white-space: nowrap;
+  overflow: hidden;
+  padding: ${props => props.theme.spacing.small} ${props =>
+  props.theme.spacing.medium};
+  border: 0 none;
+  border-radius: ${props => props.theme.borderRadius.small};
+  font-size: ${props => props.theme.font.normal};
+`

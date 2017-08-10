@@ -23,11 +23,6 @@ const Body = ({ add, counter }) =>
         <Button text="test">Button</Button>
       </div>
     </section>
-    <section>
-      <section>
-        <Button />
-      </section>
-    </section>
   </section>
 
 const Homepage = connect(
