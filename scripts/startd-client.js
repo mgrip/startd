@@ -4,18 +4,12 @@ import App from '../src/App.js'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
-import { reducer as counterReducer } from '../src/reducers/counter'
 import io from 'socket.io-client'
 import { AppContainer } from 'react-hot-loader'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(
-  combineReducers({
-    counter: counterReducer
-  }),
-  composeEnhancers()
-)
+const store = createStore((state = {}, action) => state, composeEnhancers())
 
 const render = Component => {
   ReactDOM.render(
