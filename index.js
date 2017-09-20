@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const ncp = require('ncp').ncp
 const path = require('path')
 const dependencies = require('./package.json').dependencies
