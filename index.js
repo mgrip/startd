@@ -15,6 +15,11 @@ const error = chalk.redBright.bold
 
 console.log(title('Lets get startd! 🚀'))
 
+if (!updateMode && !projectName) {
+  console.log(error('You must specifiy a project name!'))
+  return
+}
+
 if (updateMode) {
   console.log(title('Updating startd scripts for existing project...'))
   if (!fs.existsSync('./scripts')) {
