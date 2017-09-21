@@ -17,7 +17,7 @@ const hotModuleReplacementPort = 8000
 let server = null
 const refresh = () => {
   if (server) server.kill()
-  server = fork(path.resolve(publicPath, serverBundle))
+  server = fork(path.resolve(publicPath, serverBundle), { stdio: 'inherit' })
   console.log('Restarted the server')
 }
 
@@ -109,16 +109,10 @@ if (production) {
     hot: true,
     inline: true,
     proxy: {
-      '*': {
+      '/{!(startd.bundle.js|sockjs-node|hot-update)/**,!(startd.bundle.js|sockjs-node|hot-update),}': {
         target: 'http://localhost:' + port + '/',
-        bypass: function(req, res, proxyOptions) {
-          if (
-            req.path === '/startd.bundle.js' ||
-            req.path.indexOf('hot-update') > -1
-          ) {
-            return false
-          }
-        }
+        ws: true,
+        logLevel: 'debug'
       }
     }
   }).listen(hotModuleReplacementPort)

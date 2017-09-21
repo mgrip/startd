@@ -5,7 +5,7 @@ import App from '../src/App.js'
 import { StaticRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import socketIO from 'socket.io'
+import WebSocket from 'ws'
 
 const store = createStore((state = {}) => state)
 
@@ -33,9 +33,9 @@ const server = express()
   })
   .listen(process.env.PORT || 3000)
 
-const io = socketIO(server, { serveClient: false })
+const ws = new WebSocket.Server({ server })
 
-io.on('connection', socket => {
+ws.on('connection', socket => {
   console.log('hi client connected')
   socket.on('disconnect', () => {
     console.log('client disconnect')

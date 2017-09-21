@@ -4,7 +4,6 @@ import App from '../src/App.js'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
-import io from 'socket.io-client'
 import { AppContainer } from 'react-hot-loader'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -36,7 +35,10 @@ if (module.hot) {
   })
 }
 
-var socket = io()
-socket.on('connection', () => {
+const socket = new WebSocket('ws://' + window.location.host)
+socket.onopen = () => {
   console.log('connected to startd server')
-})
+}
+socket.onmessage = e => {
+  console.log(e)
+}
