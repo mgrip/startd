@@ -33,13 +33,15 @@ const config = {
             'babel-preset-es2015',
             'babel-preset-stage-1',
             'babel-preset-react'
-          ],
-          plugins: ['react-hot-loader/babel']
+          ]
         }
       }
     ]
   },
   devtool: 'eval'
+}
+if (process.env.NODE_ENV !== 'production') {
+  config.module.rules[0].options.plugins = ['react-hot-loader/babel']
 }
 
 const serverConfig = Object.assign({}, config, {
@@ -51,26 +53,25 @@ const serverConfig = Object.assign({}, config, {
   target: 'node'
 })
 const clientConfig = Object.assign({}, config, {
-  entry: [
-    'react-hot-loader/patch',
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:' + hotModuleReplacementPort,
-    path.resolve(scriptsPath, clientEntry)
-  ],
+  entry: [path.resolve(scriptsPath, clientEntry)],
   output: {
     path: publicPath,
     filename: clientBundle
-  },
-  plugins: [
+  }
+})
+debugger
+if (process.env.NODE_ENV !== 'production') {
+  debugger
+  clientConfig.entry.unshift(
+    'react-hot-loader/patch',
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:' + hotModuleReplacementPort
+  )
+  clientConfig.plugins = [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ]
-})
-
-let production = false
-process.argv.forEach(function(val, index, array) {
-  if (val === '--prod') production = true
-})
+}
 
 const outputMessages = stats => {
   const messages = formatWebpackMessages(stats)
@@ -98,7 +99,7 @@ const createCompiler = config => {
   return compiler
 }
 
-if (production) {
+if (process.env.NODE_ENV === 'production') {
   webpack([serverConfig, clientConfig]).run(err => {
     refresh()
   })

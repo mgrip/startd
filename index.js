@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const ncp = require('ncp').ncp
 const path = require('path')
-const dependencies = require('./package.json').dependencies
+const packageJSON = require('./package.json')
 const spawn = require('child_process').spawn
 const fs = require('fs')
 const chalk = require('chalk')
@@ -69,10 +69,8 @@ ncp(
         fs.writeFile(
           './package.json',
           JSON.stringify({
-            dependencies: dependencies,
-            scripts: {
-              start: 'node ./scripts/startd.js'
-            }
+            dependencies: packageJSON.dependencies,
+            scripts: packageJSON.scripts
           }),
           'utf8',
           () => {
