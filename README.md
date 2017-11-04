@@ -1,5 +1,5 @@
 # startd
-http://www.startd.io
+[startd.io](https://www.startd.io)
 
 ## Installation
 
