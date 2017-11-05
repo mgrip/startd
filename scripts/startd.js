@@ -4,6 +4,7 @@ const fork = require("child_process").fork;
 const express = require("express");
 const WebpackDevServer = require("webpack-dev-server");
 const formatWebpackMessages = require("webpack-format-messages");
+const { "build-only": buildOnly } = require("minimist")(process.argv.slice(2));
 
 const publicPath = path.resolve(process.cwd(), "public");
 const scriptsPath = path.resolve(process.cwd(), "scripts");
@@ -112,7 +113,9 @@ const createCompiler = config => {
 
 if (process.env.NODE_ENV === "production") {
   webpack([serverConfig, clientConfig]).run((err, stats) => {
-    refresh();
+    if (!buildOnly) {
+      refresh();
+    }
   });
 } else {
   const server = new WebpackDevServer(createCompiler(clientConfig), {
