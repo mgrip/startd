@@ -38,7 +38,8 @@ const config = {
       }
     ]
   },
-  devtool: "eval"
+  devtool: "eval",
+  plugins: []
 };
 if (process.env.NODE_ENV !== "production") {
   config.module.rules[0].options.plugins = ["react-hot-loader/babel"];
