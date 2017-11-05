@@ -1,6 +1,6 @@
 {
   "name": "startd-cli",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description":
     "Starter app along the lines of create-react-app, with some extra goodies",
   "repository": {
