@@ -38,18 +38,20 @@ const config = {
       }
     ]
   },
-  devtool: "eval",
   plugins: []
 };
 if (process.env.NODE_ENV !== "production") {
   config.module.rules[0].options.plugins = ["react-hot-loader/babel"];
+  config.devtool = "eval";
 } else {
   config.plugins = [
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production")
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
     }),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.AggressiveMergingPlugin()
   ];
 }
