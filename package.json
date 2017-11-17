@@ -1,8 +1,7 @@
 {
   "name": "startd-cli",
   "version": "0.1.11",
-  "description":
-    "Starter app along the lines of create-react-app, with some extra goodies",
+  "description": "Starter app along the lines of create-react-app, with some extra goodies",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mgrip/startd.git"
@@ -22,9 +21,9 @@
     "express": "^4.16.2",
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-hot-loader": "^3.1.1",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-hot-loader": "^3.1.3",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -36,7 +35,7 @@
     "webpack-dev-server": "^2.9.4",
     "webpack-format-messages": "^1.0.1",
     "webpack-hot-middleware": "^2.20.0",
-    "ws": "^3.3.0"
+    "ws": "^3.3.1"
   },
   "scripts": {
     "preinstall": "npm install pm2 -g",
