@@ -34,11 +34,3 @@ if (module.hot) {
     render(NextApp);
   });
 }
-
-const socket = new WebSocket("wss://" + window.location.host);
-socket.onopen = () => {
-  console.log("connected to startd server");
-};
-socket.onmessage = e => {
-  console.log(e);
-};
