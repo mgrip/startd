@@ -1,7 +1,8 @@
 {
   "name": "startd-cli",
   "version": "0.1.11",
-  "description": "Starter app along the lines of create-react-app, with some extra goodies",
+  "description":
+    "Starter app along the lines of create-react-app, with some extra goodies",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mgrip/startd.git"
@@ -38,12 +39,10 @@
     "ws": "^3.3.1"
   },
   "scripts": {
-    "preinstall": "npm install pm2 -g",
-    "develop": "node ./scripts/startd.js",
-    "debug": "node --inspect ./scripts/startd.js",
+    "start": "node ./scripts/startd.js",
     "test-production": "NODE_ENV=production node ./scripts/startd.js",
-    "start": "pm2 start ./public/startd-server.bundle.js --attach",
-    "postinstall": "NODE_ENV=production node ./scripts/startd.js --build-only"
+    "deploy": "pm2 start ./public/startd-server.bundle.js --attach",
+    "build": "NODE_ENV=production node ./scripts/startd.js --build-only"
   },
   "bin": {
     "startd": "./index.js"
