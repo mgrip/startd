@@ -1,6 +1,6 @@
 {
   "name": "startd-cli",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description":
     "Starter app along the lines of create-react-app, with some extra goodies",
   "repository": {
@@ -39,10 +39,9 @@
     "ws": "^3.3.1"
   },
   "scripts": {
-    "start": "node ./scripts/startd.js",
-    "test-production": "NODE_ENV=production node ./scripts/startd.js",
-    "deploy": "pm2 start ./public/startd-server.bundle.js --attach",
-    "build": "NODE_ENV=production node ./scripts/startd.js --build-only"
+    "startd": "node ./scripts/startd.js",
+    "build": "NODE_ENV=production node ./scripts/build",
+    "start": "node ./public/startd-server.bundle.js"
   },
   "bin": {
     "startd": "./index.js"
