@@ -33,12 +33,12 @@ const devServer = new WebpackDevServer(createCompiler(clientConfig), {
   hot: true,
   inline: true,
   proxy: {
-    "/{!(startd.bundle.js|sockjs-node|hot-update)/**,!(startd.bundle.js|sockjs-node|hot-update),}": {
+    "/{!(startd.bundle.js|sockjs-node|*.hot-update.json),!(sockjs-node)/**/!(*.hot-update.json)}": {
       target: "http://localhost:" + port + "/",
-      ws: true,
       logLevel: "debug"
     }
-  }
+  },
+  noInfo: true
 }).listen(hotModuleReplacementPort);
 createCompiler(serverConfig).watch({}, err => {
   refresh();

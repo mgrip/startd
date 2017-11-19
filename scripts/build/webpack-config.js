@@ -56,7 +56,8 @@ exports.clientConfig = Object.assign({}, config, {
   entry: [path.resolve(scriptsPath, clientEntry)],
   output: {
     path: publicPath,
-    filename: clientBundle
+    filename: clientBundle,
+    publicPath: "/"
   }
 });
 if (process.env.NODE_ENV !== "production") {
