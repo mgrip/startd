@@ -1,3 +1,5 @@
+// @flow
+
 const formatWebpackMessages = require("webpack-format-messages");
 const webpack = require("webpack");
 const path = require("path");
@@ -21,7 +23,8 @@ const config = {
           presets: [
             "babel-preset-es2015",
             "babel-preset-stage-1",
-            "babel-preset-react"
+            "babel-preset-react",
+            "babel-preset-flow"
           ]
         }
       }

@@ -1,3 +1,5 @@
+// @flow
+
 const webpack = require("webpack");
 const {
   serverConfig,

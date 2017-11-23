@@ -1,10 +1,12 @@
+// @flow
+
 export default {
   // Breakpoints
   breakpoints: {
-    small: '38em',
-    medium: '62em',
-    large: '68em',
-    extraLarge: '110em'
+    small: "38em",
+    medium: "62em",
+    large: "68em",
+    extraLarge: "110em"
   },
 
   // Type scale
@@ -20,50 +22,50 @@ export default {
     'Apple Color Emoji',
     'Segoe UI Emoji',
     'Segoe UI Symbol'`,
-    small: '.5rem',
-    normal: '1rem',
-    large: '2rem',
-    extraLarge: '3rem'
+    small: ".5rem",
+    normal: "1rem",
+    large: "2rem",
+    extraLarge: "3rem"
   },
 
   // Color palette
   colors: {
-    white: 'hsl(0, 0, 100%)',
-    black: 'hsl(0, 0, 0)',
+    white: "hsl(0, 0, 100%)",
+    black: "hsl(0, 0, 0)",
 
-    primary: 'blue',
-    lightPrimary: 'red',
-    darkPrimary: 'grey',
+    primary: "blue",
+    lightPrimary: "red",
+    darkPrimary: "grey",
 
-    secondary: 'red',
-    lightSecondary: '',
-    darkSecondary: '',
+    secondary: "red",
+    lightSecondary: "",
+    darkSecondary: "",
 
-    border: '',
-    base: '',
+    border: "",
+    base: "",
 
-    success: '',
-    alert: ''
+    success: "",
+    alert: ""
   },
 
   // Spacing
   spacing: {
-    small: '.5rem',
-    medium: '1rem',
-    large: '2rem',
-    extraLarge: '3rem'
+    small: ".5rem",
+    medium: "1rem",
+    large: "2rem",
+    extraLarge: "3rem"
   },
 
   // Border radius
   borderRadius: {
-    small: '.3rem',
-    medium: '.5rem',
-    large: '1rem'
+    small: ".3rem",
+    medium: ".5rem",
+    large: "1rem"
   },
 
   borderWeight: {
-    light: '',
-    normal: '',
-    heavy: ''
+    light: "",
+    normal: "",
+    heavy: ""
   }
-}
+};

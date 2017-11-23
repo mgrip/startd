@@ -1,9 +1,12 @@
-import React from 'react'
+// @flow
 
-const Input = ({ value, label, onChange }) =>
+import React from "react";
+
+const Input = ({ value, label, onChange }) => (
   <label>
     {label}
     <input type="text" value={value} onChange={onChange} />
   </label>
+);
 
-export default Input
+export default Input;

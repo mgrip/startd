@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import { Provider, connect } from "react-redux";
 import theme from "./theme";

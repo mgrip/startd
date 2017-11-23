@@ -1,4 +1,6 @@
-import styled from 'styled-components'
+// @flow
+
+import styled from "styled-components";
 
 export default styled.button`
   color: ${props => props.theme.colors.secondary};
@@ -11,4 +13,4 @@ export default styled.button`
   border: 0 none;
   border-radius: ${props => props.theme.borderRadius.small};
   font-size: ${props => props.theme.font.normal};
-`
+`;
