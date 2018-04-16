@@ -1,0 +1,35 @@
+{
+  "name": "startd-server",
+  "version": "0.0.0-development",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "flow-bin": "^0.70.0",
+    "koa-webpack": "^3.0.2",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chalk": "^2.4.1",
+    "find-up": "^2.1.0",
+    "koa": "^2.5.0",
+    "koa-static": "^4.0.2",
+    "minimist": "^1.2.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-hot-loader": "^4.0.1",
+    "webpack": "^4.6.0",
+    "winston": "^3.0.0-rc5"
+  },
+  "scripts": {
+    "build": "babel src/ -d lib/",
+    "prepublish": "yarn run build"
+  }
+}

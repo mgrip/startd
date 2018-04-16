@@ -1,0 +1,21 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/flow-typed/npm
+
+### startd-server ###
+
+# dependencies
+/packages/startd-server/node_modules
+
+# webpack output
+/packages/startd-server/public
+/packages/startd-server/lib/server.bundle.js
+
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
