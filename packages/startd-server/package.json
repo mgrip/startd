@@ -1,7 +1,11 @@
 {
   "name": "startd-server",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "lib/index.js",
+  "bin": {
+    "startd": "lib/index.js"
+  },
+  "repository": "https://github.com/mgrip/startd.git",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
