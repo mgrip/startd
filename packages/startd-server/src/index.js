@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 //@flow
 
 import webpack from "webpack";
