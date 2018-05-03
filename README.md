@@ -14,14 +14,14 @@ _note: startd uses webpack+babel to compile your app. By default it will use the
 
 ```bash
 yarn add startd-server
-yarn run startd --path app.js
+yarn run startd app.js
 ```
 
 ### npm
 
 ```bash
 npm install --save startd-server
-npx startd --path app.js
+npx startd app.js
 ```
 
 ### How it works
