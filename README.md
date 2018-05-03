@@ -8,7 +8,7 @@ startd is a collection of [toolboxes](https://youtu.be/G39lKaONAlA?t=1398) ðŸ› ð
 
 ## Getting started
 
-_note: startd uses webpack+babel to compile your app. If your project doesn't already have a .babelrc file, you'll need to create one. check out the [docs](https://babeljs.io/docs/usage/babelrc/), or our example_
+_note: startd uses webpack+babel to compile your app. By default it will use the [react babel preset](https://babeljs.io/docs/plugins/preset-react/), but if you want to add other transpile options you can create a .babelrc file in your app directory_
 
 ### yarn
 
