@@ -10,16 +10,16 @@ import findUp from "find-up";
 import logger from "./logger";
 import config from "./webpack.config.js";
 
-const argv = minimist(process.argv.slice(2));
+const {
+  _: [inputPath]
+} = minimist(process.argv.slice(2));
 
-if (typeof argv.path !== "string") {
-  logger.error(
-    'You must provide a valid "--path" argument, as a path to your root App component.'
-  );
+if (typeof inputPath !== "string") {
+  logger.error("You must provide a valid path to your root App component");
   process.exit(1);
 }
 // $FlowFixMe - for some reason flow isn't picking up the process.exit above
-const appPath = path.resolve(process.cwd(), argv.path);
+const appPath = path.resolve(process.cwd(), inputPath);
 if (!fs.existsSync(appPath)) {
   logger.error(`${appPath} is not a valid filepath 😿`);
   process.exit(1);
