@@ -26,13 +26,16 @@ if (!fs.existsSync(appPath)) {
 }
 
 if (!findUp.sync(".babelrc", { cwd: path.dirname(appPath) })) {
-  logger.error(
-    `Looks like you don't have a .babelrc file set up for your app. 👻`
+  logger.info(
+    `Looks like you don't have a .babelrc file set up for your app 👻`
   );
-  process.exit(1);
+  logger.info(
+    `  * by default startd transpiles your app using the react babel preset`
+  );
+  logger.info(`  * add a .babelrc file for other transpile options`);
 }
 
-logger.info(chalk.gray("Starting webpack compilation... 🕸"));
+logger.info("Starting webpack compilation... 🕸");
 
 const appConfig = config.map(singleConfig => ({
   ...singleConfig,
@@ -63,11 +66,9 @@ webpack(appConfig, (err, multiStats) => {
     // watch mode and hot module replacement for the client code
     if (process.env.NODE_ENV !== "production") {
       logger.info(
-        chalk.gray(
-          'startd running in dev mode 🛠  make sure to add "--prod" flag when running in production'
-        )
+        'startd running in dev mode 🛠  make sure to add "--prod" flag when running in production'
       );
-      logger.info(chalk.gray("🛠  compiling webpack for dev server... 🕸"));
+      logger.info("🛠  compiling webpack for dev server... 🕸");
       const Koa = require("koa");
       const webpackDevMiddleware = require("koa-webpack");
 

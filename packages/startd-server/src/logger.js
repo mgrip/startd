@@ -30,7 +30,7 @@ const debugLogger = winston.createLogger({
 
 export default {
   info: function(message: string) {
-    logger.log("info", message);
+    logger.log("info", chalk.gray(message));
   },
   error: function(message: string) {
     logger.log("error", message);
