@@ -46,7 +46,7 @@ var debugLogger = _winston2.default.createLogger({
 
 var _default = {
   info: function info(message) {
-    logger.log("info", message);
+    logger.log("info", _chalk2.default.gray(message));
   },
   error: function error(message) {
     logger.log("error", message);
