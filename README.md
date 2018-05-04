@@ -39,3 +39,7 @@ When running in development mode, startd additionally launches another server to
 Contributions welcome!
 
 ### 👨‍🎤👩‍🔬👨‍🎨
+
+#
+
+![startd example](/assets/startd-example.gif)
