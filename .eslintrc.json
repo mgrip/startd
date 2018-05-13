@@ -16,6 +16,8 @@
     "browser": true
   },
   "globals": {
-    "APP_PATH": false
+    "APP_PATH": false,
+    "BUNDLE_PATH": false,
+    "PORT": false
   }
 }

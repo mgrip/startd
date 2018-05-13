@@ -12,16 +12,13 @@ const app = new Koa();
 
 app.use(serve(path.resolve(process.cwd(), "public"), { maxage: 0 }));
 
-// @TODO: make this relative for prod
-const bundlePath = "http://localhost:8080/app.bundle.js";
-
 app.use(async ctx => {
   ctx.type = "html";
   ctx.body = `<!doctype html><html lang="en">
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script type="text/javascript" src="${bundlePath}"></script>
+        <script type="text/javascript" src="${BUNDLE_PATH}"></script>
       </head>
       <body>
         <div id="root">${renderToString(<App />)}</div>
@@ -29,4 +26,4 @@ app.use(async ctx => {
     </html>`;
 });
 
-app.listen(3000);
+app.listen(PORT);

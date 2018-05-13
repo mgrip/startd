@@ -42,7 +42,17 @@ const appConfig = config.map(singleConfig => ({
   plugins: [
     ...singleConfig.plugins,
     new webpack.DefinePlugin({
-      APP_PATH: JSON.stringify(appPath)
+      ...{ APP_PATH: JSON.stringify(appPath), PORT: 3000 },
+      ...(process.env.NODE_ENV === "production"
+        ? {
+            "process.env.NODE_ENV": JSON.stringify("production"),
+            BUNDLE_PATH: JSON.stringify(config[1].output.filename)
+          }
+        : {
+            BUNDLE_PATH: JSON.stringify(
+              "http://localhost:8080/" + config[1].output.filename
+            )
+          })
     })
   ]
 }));
@@ -122,6 +132,12 @@ webpack(appConfig, (err, multiStats) => {
       });
       devApp.use(devMiddleware);
       devApp.listen(8080);
+    } else {
+      logger.info(
+        `App successfully running production build. Your app is listening on port ${chalk.magenta(
+          "3000"
+        )}`
+      );
     }
   }
 });
