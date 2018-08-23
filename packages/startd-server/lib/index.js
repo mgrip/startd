@@ -106,13 +106,13 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
 
       var devApp = new Koa();
       var clientConfig = appConfig[1];
-      var devMiddleware = webpackDevMiddleware({
+      webpackDevMiddleware({
         config: _extends({}, clientConfig, {
           output: _extends({}, clientConfig.output, {
             publicPath: "http://localhost:8080/"
           })
         }),
-        dev: {
+        devMiddleware: {
           // since we're running the dev server for the client independently of
           // the backend server, we need to specify access control for the request
           // from the original host (3000) to connect to the websocket server (8081)
@@ -121,16 +121,13 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
           },
           logLevel: "silent"
         }
-      });
-      var dev = devMiddleware.dev;
-
-      dev.waitUntilValid(function () {
+      }).then(function (middleware) {
         _logger2.default.info("\uD83D\uDEE0  dev server launched " + _chalk2.default.green("successfully!") + " \uD83C\uDF7E  \uD83D\uDEEB");
         _logger2.default.info("Your app is now listening on ports " + _chalk2.default.cyan("3000") + ", " + _chalk2.default.cyan("8000") + ", and " + _chalk2.default.cyan("8081") + " \uD83E\uDD18");
         _logger2.default.info("You can access your app at " + _chalk2.default.underline.magenta("http://localhost:3000") + "\n\n                 ---------------\n                 |   browser   |\n                 ---------------\n                \u2199\u2197            \u2196\u2198\n----------------------      ------------------------------\n|       server       |      |        dev-server          |\n| (initial response) |      |       (app bundle)         |\n|   localhost:3000   |      |      localhost:8080        |\n----------------------      | websocket server (for HMR) |\n                            |      localhost:8081        |\n                            ------------------------------");
+        devApp.use(middleware);
+        devApp.listen(8080);
       });
-      devApp.use(devMiddleware);
-      devApp.listen(8080);
     } else {
       _logger2.default.info("App successfully running production build. Your app is listening on port " + _chalk2.default.magenta("3000"));
     }

@@ -84,7 +84,7 @@ webpack(appConfig, (err, multiStats) => {
 
       const devApp = new Koa();
       const clientConfig = appConfig[1];
-      const devMiddleware = webpackDevMiddleware({
+      webpackDevMiddleware({
         config: {
           ...clientConfig,
           output: {
@@ -92,7 +92,7 @@ webpack(appConfig, (err, multiStats) => {
             publicPath: "http://localhost:8080/"
           }
         },
-        dev: {
+        devMiddleware: {
           // since we're running the dev server for the client independently of
           // the backend server, we need to specify access control for the request
           // from the original host (3000) to connect to the websocket server (8081)
@@ -101,9 +101,7 @@ webpack(appConfig, (err, multiStats) => {
           },
           logLevel: "silent"
         }
-      });
-      const { dev } = devMiddleware;
-      dev.waitUntilValid(() => {
+      }).then(middleware => {
         logger.info(
           `🛠  dev server launched ${chalk.green("successfully!")} 🍾  🛫`
         );
@@ -129,9 +127,9 @@ webpack(appConfig, (err, multiStats) => {
                             |      localhost:8081        |
                             ------------------------------`
         );
+        devApp.use(middleware);
+        devApp.listen(8080);
       });
-      devApp.use(devMiddleware);
-      devApp.listen(8080);
     } else {
       logger.info(
         `App successfully running production build. Your app is listening on port ${chalk.magenta(
