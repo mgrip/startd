@@ -25,7 +25,7 @@ app.use(async ctx => {
         <script type="text/javascript" src="${BUNDLE_PATH}"></script>
       </head>
       <body>
-        <div id="root">${renderToString(<App ctx={{ ...ctx }} />)}</div>
+        <div id="root">${renderToString(<App />)}</div>
       </body>
     </html>`;
 });
