@@ -11,7 +11,8 @@ import logger from "./logger";
 import config from "./webpack.config.js";
 
 const {
-  _: [inputPath]
+  _: [inputPath],
+  middleware
 } = minimist(process.argv.slice(2));
 
 if (typeof inputPath !== "string") {
@@ -23,6 +24,15 @@ const appPath = path.resolve(process.cwd(), inputPath);
 if (!fs.existsSync(appPath)) {
   logger.error(`${appPath} is not a valid filepath 😿`);
   process.exit(1);
+}
+
+let middlewarePath;
+if (middleware) {
+  middlewarePath = path.resolve(process.cwd(), middleware);
+  if (!fs.existsSync(middlewarePath)) {
+    logger.error(`${middlewarePath} is not a valid filepath 😿`);
+    process.exit(1);
+  }
 }
 
 if (!findUp.sync(".babelrc", { cwd: path.dirname(appPath) })) {
@@ -43,6 +53,9 @@ const appConfig = config.map(singleConfig => ({
     ...singleConfig.plugins,
     new webpack.DefinePlugin({
       ...{ APP_PATH: JSON.stringify(appPath), PORT: 3000 },
+      ...(middleware
+        ? { MIDDLEWARE_PATH: JSON.stringify(middlewarePath) }
+        : {}),
       ...(process.env.NODE_ENV === "production"
         ? {
             "process.env.NODE_ENV": JSON.stringify("production"),

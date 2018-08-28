@@ -34,8 +34,9 @@ var app = new _koa2.default();
 
 app.use((0, _koaStatic2.default)(_path2.default.resolve(process.cwd(), "public"), { maxage: 0 }));
 
-if (AppModule.hasOwnProperty("middleware")) {
-  app.use(AppModule.middleware);
+if (typeof MIDDLEWARE_PATH !== "undefined") {
+  var MiddlewareModule = require(MIDDLEWARE_PATH);
+  app.use(MiddlewareModule.default);
 }
 
 app.use(function () {
@@ -45,7 +46,7 @@ app.use(function () {
         switch (_context.prev = _context.next) {
           case 0:
             ctx.type = "html";
-            ctx.body = "<!doctype html><html lang=\"en\">\n      <head>\n        <meta charset=\"utf-8\" />\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n        <script type=\"text/javascript\" src=\"" + BUNDLE_PATH + "\"></script>\n      </head>\n      <body>\n        <div id=\"root\">" + (0, _server.renderToString)(_react2.default.createElement(App, null)) + "</div>\n      </body>\n    </html>";
+            ctx.body = "<!doctype html><html lang=\"en\">\n      <head>\n        <meta charset=\"utf-8\" />\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n        <script type=\"text/javascript\" src=\"" + BUNDLE_PATH + "\"></script>\n      </head>\n      <body>\n        <div id=\"root\">" + (0, _server.renderToString)(_react2.default.createElement(App, { ctx: ctx })) + "</div>\n      </body>\n    </html>";
 
           case 2:
           case "end":

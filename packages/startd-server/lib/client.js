@@ -22,7 +22,7 @@ var HotApp = (0, _reactHotLoader.hot)(module)(App);
 document.addEventListener("DOMContentLoaded", function () {
   var rootElement = document.getElementById("root");
   if (rootElement) {
-    (0, _reactDom.hydrate)(_react2.default.createElement(HotApp, null), rootElement);
+    (0, _reactDom.hydrate)(_react2.default.createElement(HotApp, { ctx: {} }), rootElement);
   }
 });
 ;

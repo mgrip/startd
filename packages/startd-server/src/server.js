@@ -12,8 +12,9 @@ const app = new Koa();
 
 app.use(serve(path.resolve(process.cwd(), "public"), { maxage: 0 }));
 
-if (AppModule.hasOwnProperty("middleware")) {
-  app.use(AppModule.middleware);
+if (typeof MIDDLEWARE_PATH !== "undefined") {
+  const MiddlewareModule = require(MIDDLEWARE_PATH);
+  app.use(MiddlewareModule.default);
 }
 
 app.use(async ctx => {
@@ -25,7 +26,7 @@ app.use(async ctx => {
         <script type="text/javascript" src="${BUNDLE_PATH}"></script>
       </head>
       <body>
-        <div id="root">${renderToString(<App />)}</div>
+        <div id="root">${renderToString(<App ctx={ctx} />)}</div>
       </body>
     </html>`;
 });

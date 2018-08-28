@@ -17,6 +17,7 @@
   },
   "globals": {
     "APP_PATH": false,
+    "MIDDLEWARE_PATH": false,
     "BUNDLE_PATH": false,
     "PORT": false
   }

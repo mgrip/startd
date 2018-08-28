@@ -49,7 +49,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var _minimist = (0, _minimist3.default)(process.argv.slice(2)),
     _minimist$_ = _slicedToArray(_minimist._, 1),
-    inputPath = _minimist$_[0];
+    inputPath = _minimist$_[0],
+    middleware = _minimist.middleware;
 
 if (typeof inputPath !== "string") {
   _logger2.default.error("You must provide a valid path to your root App component");
@@ -62,6 +63,15 @@ if (!_fs2.default.existsSync(appPath)) {
   process.exit(1);
 }
 
+var middlewarePath = void 0;
+if (middleware) {
+  middlewarePath = _path2.default.resolve(process.cwd(), middleware);
+  if (!_fs2.default.existsSync(middlewarePath)) {
+    _logger2.default.error(middlewarePath + " is not a valid filepath \uD83D\uDE3F");
+    process.exit(1);
+  }
+}
+
 if (!_findUp2.default.sync(".babelrc", { cwd: _path2.default.dirname(appPath) })) {
   _logger2.default.info("Looks like you don't have a .babelrc file set up for your app \uD83D\uDC7B");
   _logger2.default.info("  * by default startd transpiles your app using the react babel preset");
@@ -72,7 +82,7 @@ _logger2.default.info("Starting webpack compilation... 🕸");
 
 var appConfig = _webpackConfig2.default.map(function (singleConfig) {
   return _extends({}, singleConfig, {
-    plugins: [].concat(_toConsumableArray(singleConfig.plugins), [new _webpack2.default.DefinePlugin(_extends({ APP_PATH: JSON.stringify(appPath), PORT: 3000 }, process.env.NODE_ENV === "production" ? {
+    plugins: [].concat(_toConsumableArray(singleConfig.plugins), [new _webpack2.default.DefinePlugin(_extends({ APP_PATH: JSON.stringify(appPath), PORT: 3000 }, middleware ? { MIDDLEWARE_PATH: JSON.stringify(middlewarePath) } : {}, process.env.NODE_ENV === "production" ? {
       "process.env.NODE_ENV": JSON.stringify("production"),
       BUNDLE_PATH: JSON.stringify(_webpackConfig2.default[1].output.filename)
     } : {
@@ -144,8 +154,10 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
     return;
   }
 
+  reactHotLoader.register(middleware, "middleware", "src/index.js");
   reactHotLoader.register(inputPath, "inputPath", "src/index.js");
   reactHotLoader.register(appPath, "appPath", "src/index.js");
+  reactHotLoader.register(middlewarePath, "middlewarePath", "src/index.js");
   reactHotLoader.register(appConfig, "appConfig", "src/index.js");
   leaveModule(module);
 })();
