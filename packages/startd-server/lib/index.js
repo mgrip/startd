@@ -140,6 +140,7 @@ var server = void 0;
           },
           logLevel: "silent",
           reporter: function reporter() {
+            // @TODO should combine this with above
             (0, _webpack2.default)(appConfig, function () {
               if (server) {
                 server.kill();
