@@ -9,6 +9,7 @@ import minimist from "minimist";
 import findUp from "find-up";
 import logger from "./logger";
 import config from "./webpack.config.js";
+import { spawn } from "child_process"
 
 const {
   _: [inputPath],
@@ -69,6 +70,7 @@ const appConfig = config.map(singleConfig => ({
     })
   ]
 }));
+let server;
 webpack(appConfig, (err, multiStats) => {
   if (err || multiStats.hasErrors()) {
     // Handle errors here
@@ -83,7 +85,13 @@ webpack(appConfig, (err, multiStats) => {
     logger.info("Launching startd server 🛫");
     // launch the server
     // $FlowFixMe webpack bundle will only exist under /lib
-    require("./server.bundle.js");
+    if (server) {
+      server.kill();
+    }
+    server = spawn("node", [path.resolve(__dirname, "server.bundle.js")], {
+      stdio: 'inherit',
+      env: process.env,
+    });
 
     // if we're in development mode, run a dev server in parallel, to enable
     // watch mode and hot module replacement for the client code
@@ -112,7 +120,19 @@ webpack(appConfig, (err, multiStats) => {
           headers: {
             "Access-Control-Allow-Origin": "http://localhost:3000"
           },
-          logLevel: "silent"
+          logLevel: "silent",
+          reporter: () => {
+            // @TODO should combine this with above
+            webpack(appConfig, () => {
+              if (server) {
+                server.kill();
+              }
+              server = spawn("node", [path.resolve(__dirname, "server.bundle.js")], {
+                stdio: 'inherit',
+                env: process.env,
+              });
+            });
+          }
         }
       }).then(middleware => {
         logger.info(

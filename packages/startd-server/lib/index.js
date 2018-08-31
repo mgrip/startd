@@ -37,6 +37,8 @@ var _webpackConfig = require("./webpack.config.js");
 
 var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
 
+var _child_process = require("child_process");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function () {
@@ -90,6 +92,7 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
     }))])
   });
 });
+var server = void 0;
 (0, _webpack2.default)(appConfig, function (err, multiStats) {
   if (err || multiStats.hasErrors()) {
     // Handle errors here
@@ -104,7 +107,13 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
     _logger2.default.info("Launching startd server 🛫");
     // launch the server
     // $FlowFixMe webpack bundle will only exist under /lib
-    require("./server.bundle.js");
+    if (server) {
+      server.kill();
+    }
+    server = (0, _child_process.spawn)("node", [_path2.default.resolve(__dirname, "server.bundle.js")], {
+      stdio: 'inherit',
+      env: process.env
+    });
 
     // if we're in development mode, run a dev server in parallel, to enable
     // watch mode and hot module replacement for the client code
@@ -129,7 +138,18 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
           headers: {
             "Access-Control-Allow-Origin": "http://localhost:3000"
           },
-          logLevel: "silent"
+          logLevel: "silent",
+          reporter: function reporter() {
+            (0, _webpack2.default)(appConfig, function () {
+              if (server) {
+                server.kill();
+              }
+              server = (0, _child_process.spawn)("node", [_path2.default.resolve(__dirname, "server.bundle.js")], {
+                stdio: 'inherit',
+                env: process.env
+              });
+            });
+          }
         }
       }).then(function (middleware) {
         _logger2.default.info("\uD83D\uDEE0  dev server launched " + _chalk2.default.green("successfully!") + " \uD83C\uDF7E  \uD83D\uDEEB");
@@ -159,6 +179,7 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
   reactHotLoader.register(appPath, "appPath", "src/index.js");
   reactHotLoader.register(middlewarePath, "middlewarePath", "src/index.js");
   reactHotLoader.register(appConfig, "appConfig", "src/index.js");
+  reactHotLoader.register(server, "server", "src/index.js");
   leaveModule(module);
 })();
 
