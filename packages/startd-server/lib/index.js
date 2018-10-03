@@ -85,7 +85,9 @@ _logger2.default.info("Starting webpack compilation... 🕸");
 var appConfig = _webpackConfig2.default.map(function (singleConfig) {
   return _extends({}, singleConfig, {
     plugins: [].concat(_toConsumableArray(singleConfig.plugins), [new _webpack2.default.DefinePlugin(_extends({ APP_PATH: JSON.stringify(appPath), PORT: 3000 }, middleware ? { MIDDLEWARE_PATH: JSON.stringify(middlewarePath) } : {}, process.env.NODE_ENV === "production" ? {
-      "process.env.NODE_ENV": JSON.stringify("production"),
+      "process.env": {
+        "NODE_ENV": JSON.stringify("production")
+      },
       BUNDLE_PATH: JSON.stringify(_webpackConfig2.default[1].output.filename)
     } : {
       BUNDLE_PATH: JSON.stringify("http://localhost:8080/" + _webpackConfig2.default[1].output.filename)
