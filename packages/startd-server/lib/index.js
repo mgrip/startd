@@ -88,7 +88,7 @@ var appConfig = _webpackConfig2.default.map(function (singleConfig) {
       "process.env": {
         "NODE_ENV": JSON.stringify("production")
       },
-      BUNDLE_PATH: JSON.stringify(_webpackConfig2.default[1].output.filename)
+      BUNDLE_PATH: JSON.stringify("/" + _webpackConfig2.default[1].output.filename)
     } : {
       BUNDLE_PATH: JSON.stringify("http://localhost:8080/" + _webpackConfig2.default[1].output.filename)
     }))])

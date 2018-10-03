@@ -62,7 +62,7 @@ const appConfig = config.map(singleConfig => ({
             "process.env": {
               "NODE_ENV": JSON.stringify("production")
             },
-            BUNDLE_PATH: JSON.stringify(config[1].output.filename)
+            BUNDLE_PATH: JSON.stringify("/" + config[1].output.filename)
           }
         : {
             BUNDLE_PATH: JSON.stringify(

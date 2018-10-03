@@ -46,7 +46,7 @@ app.use(function () {
         switch (_context.prev = _context.next) {
           case 0:
             ctx.type = "html";
-            ctx.body = "<!doctype html><html lang=\"en\">\n      <head>\n        <meta charset=\"utf-8\" />\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n        <script type=\"text/javascript\" src=\"/" + BUNDLE_PATH + "\"></script>\n      </head>\n      <body>\n        <div id=\"root\">" + (0, _server.renderToString)(_react2.default.createElement(App, { ctx: ctx })) + "</div>\n      </body>\n    </html>";
+            ctx.body = "<!doctype html><html lang=\"en\">\n      <head>\n        <meta charset=\"utf-8\" />\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n        <script type=\"text/javascript\" src=\"" + BUNDLE_PATH + "\"></script>\n      </head>\n      <body>\n        <div id=\"root\">" + (0, _server.renderToString)(_react2.default.createElement(App, { ctx: ctx })) + "</div>\n      </body>\n    </html>";
 
           case 2:
           case "end":
