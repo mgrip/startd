@@ -10,7 +10,7 @@ const AppModule = require(APP_PATH);
 const App = AppModule.default;
 const app = new Koa();
 
-app.use(serve(path.resolve(process.cwd(), "public"), { maxage: 0 }));
+app.use(serve(path.resolve(__dirname, "..", "public"), { maxage: 0 }));
 
 if (typeof MIDDLEWARE_PATH !== "undefined") {
   const MiddlewareModule = require(MIDDLEWARE_PATH);

@@ -32,7 +32,7 @@ var AppModule = require(APP_PATH);
 var App = AppModule.default;
 var app = new _koa2.default();
 
-app.use((0, _koaStatic2.default)(_path2.default.resolve(process.cwd(), "public"), { maxage: 0 }));
+app.use((0, _koaStatic2.default)(_path2.default.resolve(__dirname, "..", "public"), { maxage: 0 }));
 
 if (typeof MIDDLEWARE_PATH !== "undefined") {
   var MiddlewareModule = require(MIDDLEWARE_PATH);
