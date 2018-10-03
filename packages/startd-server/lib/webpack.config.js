@@ -42,6 +42,9 @@ var _default = [_extends({
     filename: "server.bundle.js",
     path: __dirname
   },
+  node: {
+    __dirname: true
+  },
   target: "node"
 }), _extends({
   name: "client"

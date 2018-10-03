@@ -29,6 +29,9 @@ export default [
       filename: "server.bundle.js",
       path: __dirname
     },
+    node: {
+      __dirname: true
+    },
     target: "node"
   },
   {
