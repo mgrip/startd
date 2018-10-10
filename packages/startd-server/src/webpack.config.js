@@ -12,7 +12,7 @@ const baseConfig = {
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["react"]
+          presets: ["@babel/preset-react"]
         }
       }
     ]
@@ -24,7 +24,7 @@ export default [
   {
     name: "server",
     ...baseConfig,
-    entry: ["babel-polyfill", path.resolve(__dirname, "server.js")],
+    entry: ["@babel/polyfill", path.resolve(__dirname, "server.js")],
     output: {
       filename: "server.bundle.js",
       path: __dirname
@@ -37,7 +37,7 @@ export default [
   {
     name: "client",
     ...baseConfig,
-    entry: ["babel-polyfill", path.resolve(__dirname, "client.js")],
+    entry: ["@babel/polyfill", path.resolve(__dirname, "client.js")],
     output: {
       filename: "app.bundle.js",
       path: path.resolve(__dirname, "..", "public")

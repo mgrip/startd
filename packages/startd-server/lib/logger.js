@@ -3,14 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _winston = require("winston");
+var _winston = _interopRequireDefault(require("winston"));
 
-var _winston2 = _interopRequireDefault(_winston);
-
-var _chalk = require("chalk");
-
-var _chalk2 = _interopRequireDefault(_chalk);
+var _chalk = _interopRequireDefault(require("chalk"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,33 +17,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   enterModule && enterModule(module);
 })();
 
-var prettyPrint = _winston2.default.format.prettyPrint;
+var prettyPrint = _winston.default.format.prettyPrint;
 
+var logger = _winston.default.createLogger({
+  format: _winston.default.format.printf(function (info) {
+    var type = _chalk.default.gray("log");
 
-var logger = _winston2.default.createLogger({
-  format: _winston2.default.format.printf(function (info) {
-    var type = _chalk2.default.gray("log");
     switch (info.level) {
       case "error":
-        type = _chalk2.default.red.bold("!!");
+        type = _chalk.default.red.bold("!!");
         break;
+
       case "info":
-        type = _chalk2.default.bold.blue("ℹ");
+        type = _chalk.default.bold.blue("ℹ");
         break;
     }
-    return _chalk2.default.dim("🚀") + "  " + _chalk2.default.gray("[startd-server]") + " " + type + " " + info.message;
+
+    return "".concat(_chalk.default.dim("🚀"), "  ").concat(_chalk.default.gray("[startd-server]"), " ").concat(type, " ").concat(info.message);
   }),
-  transports: [new _winston2.default.transports.Console()]
+  transports: [new _winston.default.transports.Console()]
 });
 
-var debugLogger = _winston2.default.createLogger({
+var debugLogger = _winston.default.createLogger({
   format: prettyPrint(),
-  transports: [new _winston2.default.transports.Console()]
+  transports: [new _winston.default.transports.Console()]
 });
 
 var _default = {
   info: function info(message) {
-    logger.log("info", _chalk2.default.gray(message));
+    logger.log("info", _chalk.default.gray(message));
   },
   error: function error(message) {
     logger.log("error", message);
@@ -55,7 +54,8 @@ var _default = {
     debugLogger.log("error", data);
   }
 };
-exports.default = _default;
+var _default2 = _default;
+exports.default = _default2;
 ;
 
 (function () {
@@ -67,10 +67,10 @@ exports.default = _default;
     return;
   }
 
-  reactHotLoader.register(prettyPrint, "prettyPrint", "src/logger.js");
-  reactHotLoader.register(logger, "logger", "src/logger.js");
-  reactHotLoader.register(debugLogger, "debugLogger", "src/logger.js");
-  reactHotLoader.register(_default, "default", "src/logger.js");
+  reactHotLoader.register(prettyPrint, "prettyPrint", "/Users/mgrip/repos/startd/packages/startd-server/src/logger.js");
+  reactHotLoader.register(logger, "logger", "/Users/mgrip/repos/startd/packages/startd-server/src/logger.js");
+  reactHotLoader.register(debugLogger, "debugLogger", "/Users/mgrip/repos/startd/packages/startd-server/src/logger.js");
+  reactHotLoader.register(_default, "default", "/Users/mgrip/repos/startd/packages/startd-server/src/logger.js");
   leaveModule(module);
 })();
 

@@ -3,12 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _path = require("path");
-
-var _path2 = _interopRequireDefault(_path);
+var _path = _interopRequireDefault(require("path"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17,6 +14,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
   enterModule && enterModule(module);
 })();
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var baseConfig = {
   // @TODO: swap this out for production
@@ -27,17 +28,16 @@ var baseConfig = {
       loader: "babel-loader",
       exclude: /node_modules/,
       options: {
-        presets: ["react"]
+        presets: ["@babel/preset-react"]
       }
     }]
   },
   plugins: []
 };
-
-var _default = [_extends({
+var _default = [_objectSpread({
   name: "server"
 }, baseConfig, {
-  entry: ["babel-polyfill", _path2.default.resolve(__dirname, "server.js")],
+  entry: ["@babel/polyfill", _path.default.resolve(__dirname, "server.js")],
   output: {
     filename: "server.bundle.js",
     path: __dirname
@@ -46,16 +46,17 @@ var _default = [_extends({
     __dirname: true
   },
   target: "node"
-}), _extends({
+}), _objectSpread({
   name: "client"
 }, baseConfig, {
-  entry: ["babel-polyfill", _path2.default.resolve(__dirname, "client.js")],
+  entry: ["@babel/polyfill", _path.default.resolve(__dirname, "client.js")],
   output: {
     filename: "app.bundle.js",
-    path: _path2.default.resolve(__dirname, "..", "public")
+    path: _path.default.resolve(__dirname, "..", "public")
   }
 })];
-exports.default = _default;
+var _default2 = _default;
+exports.default = _default2;
 ;
 
 (function () {
@@ -67,8 +68,8 @@ exports.default = _default;
     return;
   }
 
-  reactHotLoader.register(baseConfig, "baseConfig", "src/webpack.config.js");
-  reactHotLoader.register(_default, "default", "src/webpack.config.js");
+  reactHotLoader.register(baseConfig, "baseConfig", "/Users/mgrip/repos/startd/packages/startd-server/src/webpack.config.js");
+  reactHotLoader.register(_default, "default", "/Users/mgrip/repos/startd/packages/startd-server/src/webpack.config.js");
   leaveModule(module);
 })();
 
