@@ -60,6 +60,18 @@ class StartdServer extends React.Component<
     }));
   }
 
+  startServer(): void {
+    if (this.state.server) {
+      this.state.server.kill();
+    }
+    this.setState({
+      server: spawn("node", [path.resolve(__dirname, "server.bundle.js")], {
+        stdio: "inherit",
+        env: process.env
+      })
+    });
+  }
+
   componentDidMount() {
     const appPath = path.resolve(process.cwd(), this.state.inputAppPath);
     this.setState({ appPath });
@@ -141,12 +153,7 @@ class StartdServer extends React.Component<
         this.setState(prevState => ({
           buildStatus: { ...prevState.buildStatus, launchServer: "WORKING" }
         }));
-        this.setState({
-          server: spawn("node", [path.resolve(__dirname, "server.bundle.js")], {
-            stdio: "inherit",
-            env: process.env
-          })
-        });
+        this.startServer();
         this.setState(prevState => ({
           buildStatus: { ...prevState.buildStatus, launchServer: "DONE" }
         }));
@@ -184,21 +191,8 @@ class StartdServer extends React.Component<
               },
               logLevel: "silent",
               reporter: () => {
-                // @TODO should combine this with above
                 webpack(appConfig, () => {
-                  if (this.state.server) {
-                    this.state.server.kill();
-                  }
-                  this.setState({
-                    server: spawn(
-                      "node",
-                      [path.resolve(__dirname, "server.bundle.js")],
-                      {
-                        stdio: "inherit",
-                        env: process.env
-                      }
-                    )
-                  });
+                  this.startServer();
                 });
               }
             },
