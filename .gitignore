@@ -6,12 +6,9 @@
 
 ### startd-server ###
 
-# dependencies
-/packages/startd-server/node_modules
-
 # webpack output
-/packages/startd-server/public
-/packages/startd-server/lib/server.bundle.js
+/public
+/lib/server.bundle.js
 
 # misc
 .DS_Store

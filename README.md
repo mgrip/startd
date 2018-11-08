@@ -2,7 +2,7 @@
 
 👋
 
-startd is a collection of [toolboxes](https://youtu.be/G39lKaONAlA?t=1398) 🛠📦 to help you get your new react web app up and running fast
+startd is a [toolbox](https://youtu.be/G39lKaONAlA?t=1398) 🛠📦 to help you get your new react web app up and running fast
 
 **Going from react component to fully functioning web app should be as easy as installing a local dependency**
 
@@ -28,7 +28,7 @@ npx startd app.js
 
 _The core pieces of startd are <100 lines of code. If you want to really know how your application works, go take a look!_
 
-🔎 [server](https://github.com/mgrip/startd/blob/master/packages/startd-server/src/server.js) | [client](https://github.com/mgrip/startd/blob/master/packages/startd-server/src/client.js)
+🔎 [server](https://github.com/mgrip/startd/blob/master/src/server.js) | [client](https://github.com/mgrip/startd/blob/master/src/client.js)
 
 Under the hood, startd uses [koa](https://github.com/koajs/koa) to launch a new server, and just renders your react component specified by the `--path` parameter as the root level component. It uses the concept of [universal javascript](https://cdb.reacttraining.com/universal-javascript-4761051b7ae9) to ensure your app rendered on the initial server response is the same as the code sent to the client. It uses webpack+babel to compile your application.
 
