@@ -41,5 +41,3 @@ Contributions welcome!
 ### 👨‍🎤👩‍🔬👨‍🎨
 
 #
-
-![startd example](/.github/demo.svg)
