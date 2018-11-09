@@ -27,7 +27,8 @@ export default [
     entry: ["@babel/polyfill", path.resolve(__dirname, "server.js")],
     output: {
       filename: "server.bundle.js",
-      path: __dirname
+      path: __dirname,
+      libraryTarget: "commonjs2"
     },
     node: {
       __dirname: true

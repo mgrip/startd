@@ -4,14 +4,14 @@
 import webpack from "webpack";
 import path from "path";
 import fs from "fs";
+import http from "http";
+import type { Server } from "http";
 // not sure what's goin on with this libdef but flow is complaining
 // that its not  using flow-strict strict $FlowFixMe
 import chalk from "chalk";
 import minimist from "minimist";
 import findUp from "find-up";
 import config from "./webpack.config.js";
-import { spawn } from "child_process";
-import type { ChildProcess } from "child_process";
 import React from "react";
 import ReactCLI, { Section } from "react-cli-renderer";
 import Koa from "koa";
@@ -31,7 +31,7 @@ class StartdServer extends React.Component<
     inputMiddlewarePath?: string | boolean,
     middlewarePath?: string,
     logs: Array<string>,
-    server?: ChildProcess,
+    server?: Server,
     devMode: boolean,
     buildStatus: {
       webpackCompile: BuildStatus,
@@ -62,14 +62,13 @@ class StartdServer extends React.Component<
 
   startServer(): void {
     if (this.state.server) {
-      this.state.server.kill();
+      this.state.server.close();
     }
-    this.setState({
-      server: spawn("node", [path.resolve(__dirname, "server.bundle.js")], {
-        stdio: "inherit",
-        env: process.env
-      })
-    });
+
+    const koaApp = require("./server.bundle.js").default;
+    const server = http.createServer(koaApp.callback());
+    server.listen(3000);
+    this.setState({ server });
   }
 
   componentDidMount() {
