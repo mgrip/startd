@@ -42,4 +42,4 @@ Contributions welcome!
 
 #
 
-![startd example](/assets/startd-example.gif)
+![startd example](/.github/demo.svg)
