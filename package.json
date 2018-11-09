@@ -49,7 +49,7 @@
     "webpack": "^4.25.1"
   },
   "scripts": {
-    "build": "babel src/ -d lib/",
+    "build": "babel src/ -d lib/ --ignore '*/__tests__/*','*/__mocks__/*'",
     "prepublish": "yarn run build",
     "test": "jest"
   }

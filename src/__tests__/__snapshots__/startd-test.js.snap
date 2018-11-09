@@ -5,7 +5,7 @@ Array [
   Object {
     "entry": Array [
       "@babel/polyfill",
-      "/Users/mgrip/repos/startd/src/server.js",
+      "/TEST_DIRNAME/server.js",
     ],
     "mode": "development",
     "module": Object {
@@ -29,7 +29,7 @@ Array [
     "output": Object {
       "filename": "server.bundle.js",
       "libraryTarget": "commonjs2",
-      "path": "/Users/mgrip/repos/startd/src",
+      "path": "/TEST_DIRNAME",
     },
     "plugins": Array [
       DefinePlugin {
@@ -45,7 +45,7 @@ Array [
   Object {
     "entry": Array [
       "@babel/polyfill",
-      "/Users/mgrip/repos/startd/src/client.js",
+      "/TEST_DIRNAME/client.js",
     ],
     "mode": "development",
     "module": Object {
@@ -65,7 +65,7 @@ Array [
     "name": "client",
     "output": Object {
       "filename": "app.bundle.js",
-      "path": "/Users/mgrip/repos/startd/public",
+      "path": "/public",
     },
     "plugins": Array [
       DefinePlugin {
@@ -85,7 +85,7 @@ Array [
   Object {
     "entry": Array [
       "@babel/polyfill",
-      "/Users/mgrip/repos/startd/src/server.js",
+      "/TEST_DIRNAME/server.js",
     ],
     "mode": "development",
     "module": Object {
@@ -109,7 +109,7 @@ Array [
     "output": Object {
       "filename": "server.bundle.js",
       "libraryTarget": "commonjs2",
-      "path": "/Users/mgrip/repos/startd/src",
+      "path": "/TEST_DIRNAME",
     },
     "plugins": Array [
       DefinePlugin {
@@ -126,7 +126,7 @@ Array [
   Object {
     "entry": Array [
       "@babel/polyfill",
-      "/Users/mgrip/repos/startd/src/client.js",
+      "/TEST_DIRNAME/client.js",
     ],
     "mode": "development",
     "module": Object {
@@ -146,7 +146,7 @@ Array [
     "name": "client",
     "output": Object {
       "filename": "app.bundle.js",
-      "path": "/Users/mgrip/repos/startd/public",
+      "path": "/public",
     },
     "plugins": Array [
       DefinePlugin {

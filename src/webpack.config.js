@@ -1,6 +1,7 @@
 // @flow strict
 
 import path from "path";
+import dirname from "./dirname";
 
 const baseConfig = {
   // @TODO: swap this out for production
@@ -24,10 +25,10 @@ export default [
   {
     name: "server",
     ...baseConfig,
-    entry: ["@babel/polyfill", path.resolve(__dirname, "server.js")],
+    entry: ["@babel/polyfill", path.resolve(dirname(), "server.js")],
     output: {
       filename: "server.bundle.js",
-      path: __dirname,
+      path: dirname(),
       libraryTarget: "commonjs2"
     },
     node: {
@@ -38,10 +39,10 @@ export default [
   {
     name: "client",
     ...baseConfig,
-    entry: ["@babel/polyfill", path.resolve(__dirname, "client.js")],
+    entry: ["@babel/polyfill", path.resolve(dirname(), "client.js")],
     output: {
       filename: "app.bundle.js",
-      path: path.resolve(__dirname, "..", "public")
+      path: path.resolve(dirname(), "..", "public")
     }
   }
 ];
