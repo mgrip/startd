@@ -10,7 +10,11 @@ const ignorePatterns = [
 
 module.exports = {
   projects: [
-    { displayName: "test" },
+    {
+      displayName: "test",
+      testMatch: ["<rootDir>/**/__tests__/**/*.js"],
+      testPathIgnorePatterns: ignorePatterns
+    },
     {
       runner: "jest-runner-flowtype",
       displayName: "flow",

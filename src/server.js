@@ -32,4 +32,3 @@ app.use(async ctx => {
 });
 
 export default app;
-// app.listen(PORT);

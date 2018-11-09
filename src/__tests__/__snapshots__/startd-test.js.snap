@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`startd should correctly generate a webpack config from an input path 1`] = `
+Array [
+  Object {
+    "entry": Array [
+      "@babel/polyfill",
+      "/Users/mgrip/repos/startd/src/server.js",
+    ],
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "loader": "babel-loader",
+          "options": Object {
+            "presets": Array [
+              "@babel/preset-react",
+            ],
+          },
+          "test": /\\\\\\.\\(js\\|jsx\\)\\$/,
+        },
+      ],
+    },
+    "name": "server",
+    "node": Object {
+      "__dirname": true,
+    },
+    "output": Object {
+      "filename": "server.bundle.js",
+      "libraryTarget": "commonjs2",
+      "path": "/Users/mgrip/repos/startd/src",
+    },
+    "plugins": Array [
+      DefinePlugin {
+        "definitions": Object {
+          "APP_PATH": "\\"TEST_APP\\"",
+          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "PORT": 3000,
+        },
+      },
+    ],
+    "target": "node",
+  },
+  Object {
+    "entry": Array [
+      "@babel/polyfill",
+      "/Users/mgrip/repos/startd/src/client.js",
+    ],
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "loader": "babel-loader",
+          "options": Object {
+            "presets": Array [
+              "@babel/preset-react",
+            ],
+          },
+          "test": /\\\\\\.\\(js\\|jsx\\)\\$/,
+        },
+      ],
+    },
+    "name": "client",
+    "output": Object {
+      "filename": "app.bundle.js",
+      "path": "/Users/mgrip/repos/startd/public",
+    },
+    "plugins": Array [
+      DefinePlugin {
+        "definitions": Object {
+          "APP_PATH": "\\"TEST_APP\\"",
+          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "PORT": 3000,
+        },
+      },
+    ],
+  },
+]
+`;
+
+exports[`startd should correctly generate a webpack config from an input path 2`] = `
+Array [
+  Object {
+    "entry": Array [
+      "@babel/polyfill",
+      "/Users/mgrip/repos/startd/src/server.js",
+    ],
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "loader": "babel-loader",
+          "options": Object {
+            "presets": Array [
+              "@babel/preset-react",
+            ],
+          },
+          "test": /\\\\\\.\\(js\\|jsx\\)\\$/,
+        },
+      ],
+    },
+    "name": "server",
+    "node": Object {
+      "__dirname": true,
+    },
+    "output": Object {
+      "filename": "server.bundle.js",
+      "libraryTarget": "commonjs2",
+      "path": "/Users/mgrip/repos/startd/src",
+    },
+    "plugins": Array [
+      DefinePlugin {
+        "definitions": Object {
+          "APP_PATH": "\\"TEST_APP\\"",
+          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "MIDDLEWARE_PATH": "\\"TEST_MIDDLEWARE\\"",
+          "PORT": 3000,
+        },
+      },
+    ],
+    "target": "node",
+  },
+  Object {
+    "entry": Array [
+      "@babel/polyfill",
+      "/Users/mgrip/repos/startd/src/client.js",
+    ],
+    "mode": "development",
+    "module": Object {
+      "rules": Array [
+        Object {
+          "exclude": /node_modules/,
+          "loader": "babel-loader",
+          "options": Object {
+            "presets": Array [
+              "@babel/preset-react",
+            ],
+          },
+          "test": /\\\\\\.\\(js\\|jsx\\)\\$/,
+        },
+      ],
+    },
+    "name": "client",
+    "output": Object {
+      "filename": "app.bundle.js",
+      "path": "/Users/mgrip/repos/startd/public",
+    },
+    "plugins": Array [
+      DefinePlugin {
+        "definitions": Object {
+          "APP_PATH": "\\"TEST_APP\\"",
+          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "MIDDLEWARE_PATH": "\\"TEST_MIDDLEWARE\\"",
+          "PORT": 3000,
+        },
+      },
+    ],
+  },
+]
+`;
