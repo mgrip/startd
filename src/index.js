@@ -166,7 +166,7 @@ class StartdServer extends React.Component<
     } else {
       this.addLog(
         `App successfully running production build. Your app is listening on port ${chalk.magenta(
-          "3000"
+          this.state.port.toString()
         )}`
       );
     }
