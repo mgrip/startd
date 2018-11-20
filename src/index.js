@@ -38,7 +38,9 @@ class StartdServer extends React.Component<
     logs: Array<string>,
     server?: Server,
     devMode: boolean,
-    buildStatus: BuildStatus
+    buildStatus: BuildStatus,
+    port: number,
+    devPort: number
   }
 > {
   state = {
@@ -46,6 +48,8 @@ class StartdServer extends React.Component<
     inputMiddlewarePath,
     logs: [],
     devMode: process.env.NODE_ENV !== "production",
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
+    devPort: 8080,
     buildStatus: {
       webpackCompile: "NOTSTARTED",
       launchServer: "NOTSTARTED",
@@ -67,7 +71,7 @@ class StartdServer extends React.Component<
 
     const server = http.createServer(koaApp.callback());
     // where to get port from?
-    server.listen(3000);
+    server.listen(this.state.port);
     this.setState({ server });
   }
 
@@ -141,7 +145,7 @@ class StartdServer extends React.Component<
       const devApp = await startd.compileDevServer(updatedKoaApp => {
         this.startServer(updatedKoaApp);
       });
-      devApp.listen(8080);
+      devApp.listen(this.state.devPort);
       this.setState(prevState => ({
         buildStatus: {
           ...prevState.buildStatus,
