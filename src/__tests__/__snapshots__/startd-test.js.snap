@@ -65,7 +65,7 @@ Array [
     "name": "client",
     "output": Object {
       "filename": "app.bundle.js",
-      "path": "/public",
+      "path": "/TEST_DIRNAME/public",
     },
     "plugins": Array [
       DefinePlugin {
@@ -146,7 +146,7 @@ Array [
     "name": "client",
     "output": Object {
       "filename": "app.bundle.js",
-      "path": "/public",
+      "path": "/TEST_DIRNAME/public",
     },
     "plugins": Array [
       DefinePlugin {
