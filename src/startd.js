@@ -5,6 +5,8 @@ import type { WebpackOptions } from "webpack";
 import config from "./webpack.config.js";
 import Koa from "koa";
 import webpackDevMiddleware from "koa-webpack";
+import path from "path";
+import dirname from "./dirname";
 
 export default class Startd {
   webpackConfig: Array<WebpackOptions>;
@@ -31,12 +33,16 @@ export default class Startd {
                 "process.env": {
                   NODE_ENV: JSON.stringify("production")
                 },
-                BUNDLE_PATH: JSON.stringify("/" + config[1].output.filename)
+                BUNDLE_PATH: JSON.stringify("/" + config[1].output.filename),
+                PUBLIC_PATH: JSON.stringify(
+                  path.resolve(process.cwd(), "public")
+                )
               }
             : {
                 BUNDLE_PATH: JSON.stringify(
                   "http://localhost:8080/" + config[1].output.filename
-                )
+                ),
+                PUBLIC_PATH: JSON.stringify(path.resolve(dirname(), "public"))
               })
         })
       ]

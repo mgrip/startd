@@ -19,6 +19,7 @@
     "APP_PATH": false,
     "MIDDLEWARE_PATH": false,
     "BUNDLE_PATH": false,
+    "PUBLIC_PATH": false,
     "PORT": false
   }
 }
