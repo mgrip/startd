@@ -43,7 +43,7 @@ export default class Startd {
     }));
   }
 
-  compileApp(): Promise<Koa> {
+  compileApp(): Promise<Koa | void> {
     return new Promise((resolve, reject) => {
       // $FlowFixMe https://github.com/webpack/webpack/issues/8356
       webpack(this.webpackConfig, (err, multiStats) => {
@@ -61,8 +61,12 @@ export default class Startd {
           });
           reject();
         } else {
-          // $FlowFixMe this is the output of webpack, doesn't exist yet
-          resolve(require("./server.bundle.js").default);
+          if (process.env.NODE_ENV === "production") {
+            resolve();
+          } else {
+            // $FlowFixMe this is the output of webpack, doesn't exist yet
+            resolve(require("./server.bundle.js").default);
+          }
         }
       });
     });

@@ -41,7 +41,11 @@ export default function Cli({
             {getStepStatus(buildStatus.webpackCompile)} Compile your app with
             webpack
             <br />
-            {getStepStatus(buildStatus.launchServer)} Launch a local server
+            {devMode && (
+              <Section>
+                {getStepStatus(buildStatus.launchServer)} Launch a local server
+              </Section>
+            )}
             {devMode && (
               <Section>
                 {getStepStatus(buildStatus.webpackDevCompile)} Compile your app
@@ -55,54 +59,56 @@ export default function Cli({
               </Section>
             )}
           </Section>
-          <Section
-            align="center"
-            border={{ horizontal: " ", vertical: "      " }}
-          >
-            <Section align="center">browser</Section>⤢ ⤡
-            <Section horizontal>
-              <Section
-                border={{ horizontal: "-", vertical: "|" }}
-                align="center"
-              >
-                {buildStatus.launchServer === "DONE"
-                  ? chalk.green("server")
-                  : chalk.dim("server")}
-                <br />
-                {buildStatus.launchServer === "DONE"
-                  ? chalk.green("(initial response)")
-                  : chalk.dim("(initial response)")}
-                <br />
-                {buildStatus.launchServer === "DONE"
-                  ? chalk.green("localhost:3000")
-                  : chalk.dim("localhost:3000")}
-              </Section>
-              <Section
-                border={{ horizontal: "-", vertical: "|" }}
-                align="center"
-              >
-                {buildStatus.launchDevServer === "DONE"
-                  ? chalk.green("dev-server")
-                  : chalk.dim("dev-server")}
-                <br />
-                {buildStatus.launchDevServer === "DONE"
-                  ? chalk.green("(app bundle)")
-                  : chalk.dim("(app bundle)")}
-                <br />
-                {buildStatus.launchDevServer === "DONE"
-                  ? chalk.green("localhost:8080")
-                  : chalk.dim("localhost:8080")}
-                <br />
-                {buildStatus.launchDevServer === "DONE"
-                  ? chalk.green("websocket server (for HMR)")
-                  : chalk.dim("websocket server (for HMR)")}
-                <br />
-                {buildStatus.launchDevServer === "DONE"
-                  ? chalk.green("localhost:8081")
-                  : chalk.dim("localhost:8081")}
+          {devMode && (
+            <Section
+              align="center"
+              border={{ horizontal: " ", vertical: "      " }}
+            >
+              <Section align="center">browser</Section>⤢ ⤡
+              <Section horizontal>
+                <Section
+                  border={{ horizontal: "-", vertical: "|" }}
+                  align="center"
+                >
+                  {buildStatus.launchServer === "DONE"
+                    ? chalk.green("server")
+                    : chalk.dim("server")}
+                  <br />
+                  {buildStatus.launchServer === "DONE"
+                    ? chalk.green("(initial response)")
+                    : chalk.dim("(initial response)")}
+                  <br />
+                  {buildStatus.launchServer === "DONE"
+                    ? chalk.green("localhost:3000")
+                    : chalk.dim("localhost:3000")}
+                </Section>
+                <Section
+                  border={{ horizontal: "-", vertical: "|" }}
+                  align="center"
+                >
+                  {buildStatus.launchDevServer === "DONE"
+                    ? chalk.green("dev-server")
+                    : chalk.dim("dev-server")}
+                  <br />
+                  {buildStatus.launchDevServer === "DONE"
+                    ? chalk.green("(app bundle)")
+                    : chalk.dim("(app bundle)")}
+                  <br />
+                  {buildStatus.launchDevServer === "DONE"
+                    ? chalk.green("localhost:8080")
+                    : chalk.dim("localhost:8080")}
+                  <br />
+                  {buildStatus.launchDevServer === "DONE"
+                    ? chalk.green("websocket server (for HMR)")
+                    : chalk.dim("websocket server (for HMR)")}
+                  <br />
+                  {buildStatus.launchDevServer === "DONE"
+                    ? chalk.green("localhost:8081")
+                    : chalk.dim("localhost:8081")}
+                </Section>
               </Section>
             </Section>
-          </Section>
+          )}
         </Section>
         <Section align="center">
           Logs

@@ -25,10 +25,16 @@ export default [
   {
     name: "server",
     ...baseConfig,
-    entry: ["@babel/polyfill", path.resolve(dirname(), "server.js")],
+    entry: [
+      "@babel/polyfill",
+      path.resolve(
+        dirname(),
+        process.env.NODE_ENV === "production" ? "runServer" : "server.js"
+      )
+    ],
     output: {
       filename: "server.bundle.js",
-      path: dirname(),
+      path: process.env.NODE_ENV === "production" ? process.cwd() : dirname(),
       libraryTarget: "commonjs2"
     },
     node: {
@@ -42,7 +48,11 @@ export default [
     entry: ["@babel/polyfill", path.resolve(dirname(), "client.js")],
     output: {
       filename: "app.bundle.js",
-      path: path.resolve(dirname(), "..", "public")
+      path: path.resolve(
+        process.env.NODE_ENV === "production" ? process.cwd() : dirname(),
+        "..",
+        "public"
+      )
     }
   }
 ];

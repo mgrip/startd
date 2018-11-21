@@ -38,9 +38,7 @@ class StartdServer extends React.Component<
     logs: Array<string>,
     server?: Server,
     devMode: boolean,
-    buildStatus: BuildStatus,
-    port: number,
-    devPort: number
+    buildStatus: BuildStatus
   }
 > {
   state = {
@@ -48,8 +46,6 @@ class StartdServer extends React.Component<
     inputMiddlewarePath,
     logs: [],
     devMode: process.env.NODE_ENV !== "production",
-    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
-    devPort: 8080,
     buildStatus: {
       webpackCompile: "NOTSTARTED",
       launchServer: "NOTSTARTED",
@@ -71,7 +67,7 @@ class StartdServer extends React.Component<
 
     const server = http.createServer(koaApp.callback());
     // where to get port from?
-    server.listen(this.state.port);
+    server.listen(3000);
     this.setState({ server });
   }
 
@@ -121,17 +117,17 @@ class StartdServer extends React.Component<
     this.setState(prevState => ({
       buildStatus: { ...prevState.buildStatus, webpackCompile: "DONE" }
     }));
-    this.addLog("Launching startd server 🛫");
-    this.setState(prevState => ({
-      buildStatus: { ...prevState.buildStatus, launchServer: "WORKING" }
-    }));
-    // @TODO: handle webpack fail
-    this.startServer(koaApp);
-    this.setState(prevState => ({
-      buildStatus: { ...prevState.buildStatus, launchServer: "DONE" }
-    }));
 
-    if (this.state.devMode) {
+    if (this.state.devMode && koaApp) {
+      this.addLog("Launching startd server 🛫");
+      this.setState(prevState => ({
+        buildStatus: { ...prevState.buildStatus, launchServer: "WORKING" }
+      }));
+      // @TODO: handle webpack fail
+      this.startServer(koaApp);
+      this.setState(prevState => ({
+        buildStatus: { ...prevState.buildStatus, launchServer: "DONE" }
+      }));
       this.addLog(
         'startd running in dev mode  make sure to add "--prod" flag when running in production'
       );
@@ -145,7 +141,7 @@ class StartdServer extends React.Component<
       const devApp = await startd.compileDevServer(updatedKoaApp => {
         this.startServer(updatedKoaApp);
       });
-      devApp.listen(this.state.devPort);
+      devApp.listen(8080);
       this.setState(prevState => ({
         buildStatus: {
           ...prevState.buildStatus,
@@ -165,9 +161,8 @@ class StartdServer extends React.Component<
       );
     } else {
       this.addLog(
-        `App successfully running production build. Your app is listening on port ${chalk.magenta(
-          this.state.port.toString()
-        )}`
+        "App successfully running production build. Your app has been compiled and is ready to launch. " +
+          "Run 'node server.bundle.js' to launch the server"
       );
     }
   }
