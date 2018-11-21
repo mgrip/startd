@@ -1,6 +1,6 @@
 {
   "name": "startd-server",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "lib/index.js",
   "bin": {
     "startd": "lib/index.js"
