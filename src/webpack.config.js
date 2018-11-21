@@ -50,7 +50,6 @@ export default [
       filename: "app.bundle.js",
       path: path.resolve(
         process.env.NODE_ENV === "production" ? process.cwd() : dirname(),
-        "..",
         "public"
       )
     }
