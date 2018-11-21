@@ -30,9 +30,7 @@ export default class Startd {
             : {}),
           ...(process.env.NODE_ENV === "production"
             ? {
-                "process.env": {
-                  NODE_ENV: JSON.stringify("production")
-                },
+                "process.env.NODE_ENV": JSON.stringify("production"),
                 BUNDLE_PATH: JSON.stringify("/" + config[1].output.filename),
                 PUBLIC_PATH: JSON.stringify(
                   path.resolve(process.cwd(), "public")
