@@ -4,12 +4,13 @@ import React from "react";
 import Koa from "koa";
 import serve from "koa-static";
 import { renderToString } from "react-dom/server";
+import path from "path";
 
 const AppModule = require(APP_PATH);
 const App = AppModule.default;
 const app = new Koa();
 
-app.use(serve(PUBLIC_PATH, { maxage: 0 }));
+app.use(serve(path.resolve(__dirname, "public"), { maxage: 0 }));
 
 if (typeof MIDDLEWARE_PATH !== "undefined") {
   const MiddlewareModule = require(MIDDLEWARE_PATH);
