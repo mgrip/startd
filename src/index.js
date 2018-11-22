@@ -79,13 +79,14 @@ class StartdServer extends React.Component<
       return;
     }
 
+    let middlewarePath: string | void;
     if (this.state.inputMiddlewarePath) {
       if (typeof this.state.inputMiddlewarePath !== "string") {
         // @TODO: maybe prompt to re-enter?
         this.addLog(`Input filepath is not a string`);
         return;
       }
-      const middlewarePath = path.resolve(
+      middlewarePath = path.resolve(
         process.cwd(),
         // $FlowFixMe flow isn't picking up the check above
         this.state.inputMiddlewarePath
@@ -105,7 +106,7 @@ class StartdServer extends React.Component<
       );
     }
 
-    const startd = new Startd(appPath);
+    const startd = new Startd(appPath, middlewarePath);
 
     this.addLog("Starting webpack compilation...");
     this.setState(prevState => ({
