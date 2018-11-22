@@ -18,7 +18,7 @@ import Startd from "./startd";
 
 const {
   _: [inputAppPath],
-  inputMiddlewarePath
+  middleware: inputMiddlewarePath
 } = minimist(process.argv.slice(2));
 
 export type BuildStatusOptions = "NOTSTARTED" | "WORKING" | "DONE";
