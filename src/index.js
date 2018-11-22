@@ -92,6 +92,7 @@ class StartdServer extends React.Component<
         this.state.inputMiddlewarePath
       );
       this.setState({ middlewarePath });
+      this.addLog(`Using ${middlewarePath} middleware`);
       if (!fs.existsSync(middlewarePath)) {
         this.addLog(`${middlewarePath} is not a valid filepath`);
         return;
