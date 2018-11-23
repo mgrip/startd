@@ -20,11 +20,13 @@ function getStepStatus(status: BuildStatusOptions): string {
 export default function Cli({
   devMode,
   buildStatus,
-  logs
+  logs,
+  stdout
 }: {
   devMode: boolean,
   buildStatus: BuildStatus,
-  logs: Array<string>
+  logs: Array<string>,
+  stdout: Array<string>
 }) {
   return (
     <Section align="center">
@@ -123,6 +125,11 @@ export default function Cli({
             ))}
           </Section>
         </Section>
+      </Section>
+      <Section>
+        {stdout.map((line, index) => (
+          <Section key={index}>{line}</Section>
+        ))}
       </Section>
     </Section>
   );

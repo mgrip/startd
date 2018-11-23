@@ -5665,10 +5665,10 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-cli-renderer@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-cli-renderer/-/react-cli-renderer-1.4.1.tgz#6ef2c1487540fc94df5d46da5d406cd573c55dae"
-  integrity sha512-QK4wFuzCR/3FWmhLFvM9WHXL4nX/uPgSwprjlSJEgm49k2yKUKpPGcLo/FMc9HplNSx9MkDmPNv7D4nm09QV9g==
+react-cli-renderer@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/react-cli-renderer/-/react-cli-renderer-1.4.2.tgz#138ca02456c0bd137133832dcdf9e6df18b91c0d"
+  integrity sha512-+DFnxYSZIqAUU0K3ELBJ9hunng5XcyAnpIZk9PydzXHFp5XBbC8O3nT9vbiHfpcgvqIV4pIpn2BJzh+IikXHGQ==
   dependencies:
     ansi-escapes "^3.1.0"
     intercept-stdout "^0.1.2"

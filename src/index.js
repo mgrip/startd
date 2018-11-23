@@ -11,7 +11,7 @@ import chalk from "chalk";
 import minimist from "minimist";
 import findUp from "find-up";
 import React from "react";
-import ReactCLI from "react-cli-renderer";
+import ReactCLI, { watchStdout } from "react-cli-renderer";
 import Koa from "koa";
 import Cli from "./cli";
 import Startd from "./startd";
@@ -36,6 +36,7 @@ class StartdServer extends React.Component<
     inputMiddlewarePath?: string | boolean,
     middlewarePath?: string,
     logs: Array<string>,
+    stdout: Array<string>,
     server?: Server,
     devMode: boolean,
     buildStatus: BuildStatus
@@ -45,6 +46,7 @@ class StartdServer extends React.Component<
     inputAppPath,
     inputMiddlewarePath,
     logs: [],
+    stdout: [],
     devMode: process.env.NODE_ENV !== "production",
     buildStatus: {
       webpackCompile: "NOTSTARTED",
@@ -106,6 +108,12 @@ class StartdServer extends React.Component<
           "Add a .babelrc file for other transpile options!"
       );
     }
+
+    watchStdout(stdoutLines => {
+      this.setState(prevState => ({
+        stdout: [...prevState.stdout, ...stdoutLines]
+      }));
+    });
 
     const startd = new Startd(appPath, middlewarePath);
 
@@ -175,6 +183,7 @@ class StartdServer extends React.Component<
         devMode={this.state.devMode}
         buildStatus={this.state.buildStatus}
         logs={this.state.logs}
+        stdout={this.state.stdout}
       />
     );
   }

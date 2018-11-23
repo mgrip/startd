@@ -43,7 +43,7 @@
     "koa-webpack": "^5.1.1",
     "minimist": "^1.2.0",
     "react": "^16.6.1",
-    "react-cli-renderer": "^1.4.1",
+    "react-cli-renderer": "^1.4.2",
     "react-dom": "^16.6.1",
     "react-hot-loader": "^4.3.12",
     "webpack": "^4.25.1"
