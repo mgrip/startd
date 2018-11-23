@@ -49,11 +49,8 @@ export default class Startd {
           // Handle errors here
           // $FlowFixMe webpack has incorrect flowtype
           multiStats.stats.forEach(stats => {
-            if (
-              stats.compilation.errors &&
-              stats.compilation.errors.length > 0
-            ) {
-              console.log(stats.compilation.errors);
+            if (stats.hasErrors()) {
+              console.log(stats.toString());
             }
           });
           reject();
