@@ -2,6 +2,7 @@
 
 import path from "path";
 import dirname from "./dirname";
+import webpack from "webpack";
 
 const baseConfig = {
   // @TODO: swap this out for production
@@ -18,10 +19,9 @@ const baseConfig = {
       }
     ]
   },
-  plugins: [],
   // this is a hack to get the node-pg module to work for projects that need it.
   // see https://github.com/brianc/node-postgres/issues/1138
-  externals: ["pg/native"]
+  plugins: [new webpack.IgnorePlugin(/^pg-native$/)]
 };
 
 export default [
