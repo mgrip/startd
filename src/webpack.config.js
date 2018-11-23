@@ -18,7 +18,10 @@ const baseConfig = {
       }
     ]
   },
-  plugins: []
+  plugins: [],
+  // this is a hack to get the node-pg module to work for projects that need it.
+  // see https://github.com/brianc/node-postgres/issues/1138
+  externals: ["pg/native"]
 };
 
 export default [
