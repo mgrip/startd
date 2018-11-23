@@ -53,7 +53,7 @@ export default class Startd {
               stats.compilation.errors &&
               stats.compilation.errors.length > 0
             ) {
-              console.log(JSON.stringify(stats.compilation.errors));
+              console.log(stats.compilation.errors);
             }
           });
           reject();
