@@ -75,17 +75,6 @@ export default class Startd {
         output: {
           ...clientConfig.output,
           publicPath: "http://localhost:8080/"
-        },
-        module: {
-          ...clientConfig.module,
-          rules: [
-            ...clientConfig.module.rules,
-            {
-              test: /\.jsx?$/,
-              include: /node_modules/,
-              use: ["react-hot-loader/webpack"]
-            }
-          ]
         }
       },
       devMiddleware: {
