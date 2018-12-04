@@ -72,6 +72,17 @@ export default class Startd {
     const middleware = await webpackDevMiddleware({
       config: {
         ...clientConfig,
+        module: {
+          ...clientConfig.module,
+          rules: [
+            ...clientConfig.module.rules,
+            {
+              test: /\.jsx?$/,
+              include: /node_modules/,
+              use: ["react-hot-loader/webpack"]
+            }
+          ]
+        },
         output: {
           ...clientConfig.output,
           publicPath: "http://localhost:8080/"
