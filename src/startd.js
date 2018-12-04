@@ -75,12 +75,12 @@ export default class Startd {
         module: {
           ...clientConfig.module,
           rules: [
-            ...clientConfig.module.rules,
             {
               test: /\.jsx?$/,
               include: /node_modules/,
               use: ["react-hot-loader/webpack"]
-            }
+            },
+            ...clientConfig.module.rules
           ]
         },
         output: {
