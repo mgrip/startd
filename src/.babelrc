@@ -4,8 +4,5 @@
     "@babel/preset-react",
     "@babel/preset-flow"
   ],
-  "plugins": [
-    "react-hot-loader/babel",
-    "@babel/plugin-proposal-class-properties"
-  ]
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }
