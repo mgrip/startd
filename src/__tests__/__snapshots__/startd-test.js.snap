@@ -35,8 +35,8 @@ Array [
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
-          "resourceRegExp": /\\^pg-native\\$/,
+          "contextRegExp": /\\\\/pg\\\\//,
+          "resourceRegExp": /pg-native/,
         },
       },
       DefinePlugin {
@@ -78,8 +78,8 @@ Array [
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
-          "resourceRegExp": /\\^pg-native\\$/,
+          "contextRegExp": /\\\\/pg\\\\//,
+          "resourceRegExp": /pg-native/,
         },
       },
       DefinePlugin {
@@ -129,8 +129,8 @@ Array [
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
-          "resourceRegExp": /\\^pg-native\\$/,
+          "contextRegExp": /\\\\/pg\\\\//,
+          "resourceRegExp": /pg-native/,
         },
       },
       DefinePlugin {
@@ -173,8 +173,8 @@ Array [
       IgnorePlugin {
         "checkIgnore": [Function],
         "options": Object {
-          "contextRegExp": undefined,
-          "resourceRegExp": /\\^pg-native\\$/,
+          "contextRegExp": /\\\\/pg\\\\//,
+          "resourceRegExp": /pg-native/,
         },
       },
       DefinePlugin {

@@ -21,7 +21,7 @@ const baseConfig = {
   },
   // this is a hack to get the node-pg module to work for projects that need it.
   // see https://github.com/brianc/node-postgres/issues/1138
-  plugins: [new webpack.IgnorePlugin(/^pg-native$/)]
+  plugins: [new webpack.IgnorePlugin(/pg-native/, /\/pg\//)]
 };
 
 export default [
