@@ -22,13 +22,12 @@
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jest": "^21.27.1",
+    "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.85.0",
+    "flow-bin": "^0.89.0",
     "jest": "^23.6.0",
     "jest-runner-eslint": "^0.7.1",
-    "jest-runner-flowtype": "^0.0.7",
     "prettier": "^1.14.3"
   },
   "dependencies": {
@@ -50,7 +49,7 @@
   },
   "scripts": {
     "build": "babel src/ -d lib/ --ignore '*/__tests__/*','*/__mocks__/*'",
-    "prepublish": "yarn run build",
+    "prepublish": "npm run build",
     "test": "jest"
   }
 }

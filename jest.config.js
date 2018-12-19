@@ -16,12 +16,6 @@ module.exports = {
       testPathIgnorePatterns: ignorePatterns
     },
     {
-      runner: "jest-runner-flowtype",
-      displayName: "flow",
-      testMatch: ["<rootDir>/**/*.js"],
-      testPathIgnorePatterns: ignorePatterns
-    },
-    {
       runner: "jest-runner-eslint",
       displayName: "lint",
       testMatch: ["<rootDir>/**/*.js"],

@@ -32,6 +32,13 @@ Array [
       "path": "/TEST_DIRNAME",
     },
     "plugins": Array [
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^pg-native\\$/,
+        },
+      },
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
@@ -68,6 +75,13 @@ Array [
       "path": "/TEST_DIRNAME/public",
     },
     "plugins": Array [
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^pg-native\\$/,
+        },
+      },
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
@@ -112,6 +126,13 @@ Array [
       "path": "/TEST_DIRNAME",
     },
     "plugins": Array [
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^pg-native\\$/,
+        },
+      },
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
@@ -149,6 +170,13 @@ Array [
       "path": "/TEST_DIRNAME/public",
     },
     "plugins": Array [
+      IgnorePlugin {
+        "checkIgnore": [Function],
+        "options": Object {
+          "contextRegExp": undefined,
+          "resourceRegExp": /\\^pg-native\\$/,
+        },
+      },
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
