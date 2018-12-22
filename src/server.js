@@ -22,6 +22,9 @@ app.use(async ctx => {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript">
+          window.startdVariables = ${JSON.stringify(ctx.state.startdVariables)};
+        </script>
         <script type="text/javascript" src="${BUNDLE_PATH}"></script>
       </head>
       <body>
