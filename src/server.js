@@ -11,6 +11,11 @@ const app = new Koa();
 
 app.use(serve("public", { maxage: 0 }));
 
+app.use(async (ctx, next) => {
+  ctx.state.startd = {};
+  await next();
+});
+
 if (typeof MIDDLEWARE_PATH !== "undefined") {
   const MiddlewareModule = require(MIDDLEWARE_PATH);
   app.use(MiddlewareModule.default);
