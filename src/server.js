@@ -23,12 +23,14 @@ app.use(async ctx => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script type="text/javascript">
-          window.startdVariables = ${JSON.stringify(ctx.state.startdVariables)};
+          window.startd = ${JSON.stringify(ctx.state.startd)};
         </script>
         <script type="text/javascript" src="${BUNDLE_PATH}"></script>
       </head>
       <body>
-        <div id="root">${renderToString(<App ctx={ctx} />)}</div>
+        <div id="root">${renderToString(
+          <App ctx={ctx} startd={ctx.state.startd} />
+        )}</div>
       </body>
     </html>`;
 });

@@ -11,6 +11,6 @@ const HotApp = hot(module)(App);
 document.addEventListener("DOMContentLoaded", () => {
   const rootElement = document.getElementById("root");
   if (rootElement) {
-    hydrate(<HotApp ctx={{}} />, rootElement);
+    hydrate(<HotApp ctx={{}} startd={window.startd} />, rootElement);
   }
 });
