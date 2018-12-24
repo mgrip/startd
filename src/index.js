@@ -127,7 +127,8 @@ class StartdServer extends React.Component<
       koaApp = await startd.compileApp();
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.log(error, "Error compiling your app!");
+      return;
     }
     this.addLog(`Webpack comilation ${chalk.green("successful!")}`);
     this.setState(prevState => ({
@@ -161,7 +162,8 @@ class StartdServer extends React.Component<
         });
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.log(error);
+        console.log(error, "Error compiling your app!");
+        return;
       }
       devApp.listen(8080);
       this.setState(prevState => ({
