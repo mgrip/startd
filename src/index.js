@@ -122,7 +122,13 @@ class StartdServer extends React.Component<
       buildStatus: { ...prevState.buildStatus, webpackCompile: "WORKING" }
     }));
 
-    const koaApp = await startd.compileApp();
+    let koaApp;
+    try {
+      koaApp = await startd.compileApp();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
     this.addLog(`Webpack comilation ${chalk.green("successful!")}`);
     this.setState(prevState => ({
       buildStatus: { ...prevState.buildStatus, webpackCompile: "DONE" }
@@ -148,9 +154,15 @@ class StartdServer extends React.Component<
           webpackDevCompile: "WORKING"
         }
       }));
-      const devApp = await startd.compileDevServer(updatedKoaApp => {
-        this.startServer(updatedKoaApp);
-      });
+      let devApp;
+      try {
+        devApp = await startd.compileDevServer(updatedKoaApp => {
+          this.startServer(updatedKoaApp);
+        });
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
       devApp.listen(8080);
       this.setState(prevState => ({
         buildStatus: {
