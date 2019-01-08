@@ -9,6 +9,8 @@ const AppModule = require(APP_PATH);
 const App = AppModule.default;
 const app = new Koa();
 
+app.proxy = USE_APP_PROXY;
+
 app.use(serve("public", { maxage: 0 }));
 
 app.use(async (ctx, next) => {

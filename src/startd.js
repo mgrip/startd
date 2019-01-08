@@ -9,12 +9,17 @@ import webpackDevMiddleware from "koa-webpack";
 export default class Startd {
   webpackConfig: Array<WebpackOptions>;
 
-  constructor(appPath: string, middlewarePath?: string) {
-    this.webpackConfig = this.getWebpackConfig(appPath, middlewarePath);
+  constructor(appPath: string, useProxy: boolean, middlewarePath?: string) {
+    this.webpackConfig = this.getWebpackConfig(
+      appPath,
+      useProxy,
+      middlewarePath
+    );
   }
 
   getWebpackConfig(
     appPath: string,
+    useProxy: boolean,
     middlewarePath?: string
   ): Array<WebpackOptions> {
     return config.map(singleConfig => ({
@@ -22,7 +27,11 @@ export default class Startd {
       plugins: [
         ...singleConfig.plugins,
         new webpack.DefinePlugin({
-          ...{ APP_PATH: JSON.stringify(appPath), PORT: 3000 },
+          ...{
+            APP_PATH: JSON.stringify(appPath),
+            PORT: 3000,
+            USE_APP_PROXY: useProxy
+          },
           ...(middlewarePath
             ? { MIDDLEWARE_PATH: JSON.stringify(middlewarePath) }
             : {}),

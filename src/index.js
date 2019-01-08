@@ -18,8 +18,9 @@ import Startd from "./startd";
 
 const {
   _: [inputAppPath],
-  middleware: inputMiddlewarePath
-} = minimist(process.argv.slice(2));
+  middleware: inputMiddlewarePath,
+  useProxy
+} = minimist(process.argv.slice(2), { boolean: ["useProxy"] });
 
 export type BuildStatusOptions = "NOTSTARTED" | "WORKING" | "DONE";
 export type BuildStatus = {
@@ -115,7 +116,8 @@ class StartdServer extends React.Component<
       }));
     });
 
-    const startd = new Startd(appPath, middlewarePath);
+    // $FlowFixMe this should already be a bool from minimist
+    const startd = new Startd(appPath, useProxy, middlewarePath);
 
     this.addLog("Starting webpack compilation...");
     this.setState(prevState => ({
