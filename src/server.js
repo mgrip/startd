@@ -23,17 +23,24 @@ if (typeof MIDDLEWARE_PATH !== "undefined") {
   app.use(MiddlewareModule.default);
 }
 
+let headerString = `<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>`;
+
+if (typeof HEADER_PATH !== "undefined") {
+  const HeaderModule = require(HEADER_PATH);
+  headerString = HeaderModule.default;
+}
+
 app.use(async ctx => {
   ctx.type = "html";
   ctx.body = `<!doctype html><html lang="en">
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script type="text/javascript">
-          window.startd = ${JSON.stringify(ctx.state.startd)};
-        </script>
-        <script type="text/javascript" src="${BUNDLE_PATH}"></script>
-      </head>
+      ${headerString}
+      <script type="text/javascript">
+        window.startd = ${JSON.stringify(ctx.state.startd)};
+      </script>
+      <script type="text/javascript" src="${BUNDLE_PATH}"></script>
       <body>
         <div id="root">${renderToString(
           <App ctx={ctx} startd={ctx.state.startd} />

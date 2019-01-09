@@ -18,6 +18,7 @@
   "globals": {
     "APP_PATH": false,
     "MIDDLEWARE_PATH": false,
+    "HEADER_PATH": false,
     "BUNDLE_PATH": false,
     "USE_APP_PROXY": false
   }

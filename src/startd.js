@@ -9,18 +9,25 @@ import webpackDevMiddleware from "koa-webpack";
 export default class Startd {
   webpackConfig: Array<WebpackOptions>;
 
-  constructor(appPath: string, useProxy: boolean, middlewarePath?: string) {
+  constructor(
+    appPath: string,
+    useProxy: boolean,
+    middlewarePath?: string,
+    headerPath?: string
+  ) {
     this.webpackConfig = this.getWebpackConfig(
       appPath,
       useProxy,
-      middlewarePath
+      middlewarePath,
+      headerPath
     );
   }
 
   getWebpackConfig(
     appPath: string,
     useProxy: boolean,
-    middlewarePath?: string
+    middlewarePath?: string,
+    headerPath?: string
   ): Array<WebpackOptions> {
     return config.map(singleConfig => ({
       ...singleConfig,
@@ -35,6 +42,7 @@ export default class Startd {
           ...(middlewarePath
             ? { MIDDLEWARE_PATH: JSON.stringify(middlewarePath) }
             : {}),
+          ...(headerPath ? { HEADER_PATH: JSON.stringify(headerPath) } : {}),
           ...(process.env.NODE_ENV === "production"
             ? {
                 BUNDLE_PATH: JSON.stringify("/" + config[1].output.filename)
