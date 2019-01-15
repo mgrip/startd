@@ -42,7 +42,8 @@ Array [
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
-          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "BUNDLE_PATH": "\\"app.bundle.js\\"",
+          "DEV_PORT": "8080",
           "PORT": 3000,
           "USE_APP_PROXY": false,
         },
@@ -86,7 +87,8 @@ Array [
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
-          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "BUNDLE_PATH": "\\"app.bundle.js\\"",
+          "DEV_PORT": "8080",
           "PORT": 3000,
           "USE_APP_PROXY": false,
         },
@@ -138,7 +140,8 @@ Array [
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
-          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "BUNDLE_PATH": "\\"app.bundle.js\\"",
+          "DEV_PORT": "8080",
           "MIDDLEWARE_PATH": "\\"TEST_MIDDLEWARE\\"",
           "PORT": 3000,
           "USE_APP_PROXY": false,
@@ -183,7 +186,8 @@ Array [
       DefinePlugin {
         "definitions": Object {
           "APP_PATH": "\\"TEST_APP\\"",
-          "BUNDLE_PATH": "\\"http://localhost:8080/app.bundle.js\\"",
+          "BUNDLE_PATH": "\\"app.bundle.js\\"",
+          "DEV_PORT": "8080",
           "MIDDLEWARE_PATH": "\\"TEST_MIDDLEWARE\\"",
           "PORT": 3000,
           "USE_APP_PROXY": false,

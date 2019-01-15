@@ -45,12 +45,11 @@ export default class Startd {
           ...(headerPath ? { HEADER_PATH: JSON.stringify(headerPath) } : {}),
           ...(process.env.NODE_ENV === "production"
             ? {
-                BUNDLE_PATH: JSON.stringify("/" + config[1].output.filename)
+                BUNDLE_PATH: JSON.stringify(config[1].output.filename)
               }
             : {
-                BUNDLE_PATH: JSON.stringify(
-                  "http://localhost:8080/" + config[1].output.filename
-                )
+                BUNDLE_PATH: JSON.stringify(config[1].output.filename),
+                DEV_PORT: "8080"
               })
         })
       ]

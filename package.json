@@ -29,7 +29,8 @@
     "jest": "^23.6.0",
     "jest-runner-eslint": "^0.7.1",
     "prettier": "^1.14.3",
-    "react": "^16.7.0"
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "dependencies": {
     "@babel/core": "^7.1.5",

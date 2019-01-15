@@ -20,6 +20,7 @@
     "MIDDLEWARE_PATH": false,
     "HEADER_PATH": false,
     "BUNDLE_PATH": false,
-    "USE_APP_PROXY": false
+    "USE_APP_PROXY": false,
+    "DEV_PORT": false
   }
 }

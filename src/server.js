@@ -34,13 +34,20 @@ if (typeof HEADER_PATH !== "undefined") {
 }
 
 app.use(async ctx => {
+  let bundlePath = `/${BUNDLE_PATH}`;
+  if (typeof DEV_PORT !== "undefined") {
+    bundlePath = `${ctx.origin.substring(
+      0,
+      ctx.origin.lastIndexOf(":")
+    )}:${DEV_PORT}/${BUNDLE_PATH}`;
+  }
   ctx.type = "html";
   ctx.body = `<!doctype html><html lang="en">
       ${headerString}
       <script type="text/javascript">
         window.startd = ${JSON.stringify(ctx.state.startd)};
       </script>
-      <script type="text/javascript" src="${BUNDLE_PATH}"></script>
+      <script type="text/javascript" src="${bundlePath}"></script>
       <body>
         <div id="root">${renderToString(
           <App ctx={ctx} startd={ctx.state.startd} />
