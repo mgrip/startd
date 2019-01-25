@@ -49,6 +49,15 @@ Array [
         },
       },
     ],
+    "resolve": Object {
+      "extensions": Array [
+        "*",
+        ".js",
+        ".jsx",
+        ".tsx",
+        ".ts",
+      ],
+    },
     "target": "node",
   },
   Object {
@@ -94,6 +103,15 @@ Array [
         },
       },
     ],
+    "resolve": Object {
+      "extensions": Array [
+        "*",
+        ".js",
+        ".jsx",
+        ".tsx",
+        ".ts",
+      ],
+    },
   },
 ]
 `;
@@ -148,6 +166,15 @@ Array [
         },
       },
     ],
+    "resolve": Object {
+      "extensions": Array [
+        "*",
+        ".js",
+        ".jsx",
+        ".tsx",
+        ".ts",
+      ],
+    },
     "target": "node",
   },
   Object {
@@ -194,6 +221,15 @@ Array [
         },
       },
     ],
+    "resolve": Object {
+      "extensions": Array [
+        "*",
+        ".js",
+        ".jsx",
+        ".tsx",
+        ".ts",
+      ],
+    },
   },
 ]
 `;
