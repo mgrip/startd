@@ -51,6 +51,8 @@ Array [
     ],
     "resolve": Object {
       "extensions": Array [
+        "*",
+        ".mjs",
         ".js",
         ".jsx",
         ".tsx",
@@ -104,6 +106,8 @@ Array [
     ],
     "resolve": Object {
       "extensions": Array [
+        "*",
+        ".mjs",
         ".js",
         ".jsx",
         ".tsx",
@@ -166,6 +170,8 @@ Array [
     ],
     "resolve": Object {
       "extensions": Array [
+        "*",
+        ".mjs",
         ".js",
         ".jsx",
         ".tsx",
@@ -220,6 +226,8 @@ Array [
     ],
     "resolve": Object {
       "extensions": Array [
+        "*",
+        ".mjs",
         ".js",
         ".jsx",
         ".tsx",
