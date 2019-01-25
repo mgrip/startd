@@ -20,7 +20,7 @@ const baseConfig = {
     ]
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx", ".tsx", ".ts"]
+    extensions: [".js", ".jsx", ".tsx", ".ts"]
   },
   // this is a hack to get the node-pg module to work for projects that need it.
   // see https://github.com/brianc/node-postgres/issues/1138
