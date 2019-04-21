@@ -1,15 +1,12 @@
-// @flow strict
-
 import webpack from "webpack";
-import type { WebpackOptions } from "webpack";
-import config from "./webpack.config.js";
+import config from "./webpack.config";
 import Koa from "koa";
 import webpackDevMiddleware from "koa-webpack";
 
 export default class Startd {
-  webpackConfig: Array<WebpackOptions>;
+  public webpackConfig: webpack.Configuration[];
 
-  constructor(
+  public constructor(
     appPath: string,
     useProxy: boolean,
     middlewarePath?: string,
@@ -23,12 +20,12 @@ export default class Startd {
     );
   }
 
-  getWebpackConfig(
+  public getWebpackConfig(
     appPath: string,
     useProxy: boolean,
     middlewarePath?: string,
     headerPath?: string
-  ): Array<WebpackOptions> {
+  ): webpack.Configuration[] {
     return config.map(singleConfig => ({
       ...singleConfig,
       plugins: [
@@ -56,14 +53,12 @@ export default class Startd {
     }));
   }
 
-  compileApp(): Promise<Koa | void> {
+  public compileApp(): Promise<Koa | void> {
     return new Promise((resolve, reject) => {
-      // $FlowFixMe https://github.com/webpack/webpack/issues/8356
       webpack(this.webpackConfig, (err, multiStats) => {
-        // $FlowFixMe webpack has incorrect flowtype
         if (err || multiStats.hasErrors()) {
           // Handle errors here
-          // $FlowFixMe webpack has incorrect flowtype
+          // @ts-ignore webpack stats type is wrong
           multiStats.stats.forEach(stats => {
             if (stats.hasErrors()) {
               // eslint-disable-next-line no-console
@@ -75,7 +70,6 @@ export default class Startd {
           if (process.env.NODE_ENV === "production") {
             resolve();
           } else {
-            // $FlowFixMe this is the output of webpack, doesn't exist yet
             resolve(require("./server.bundle.js").default);
           }
         }
@@ -83,7 +77,7 @@ export default class Startd {
     });
   }
 
-  async compileDevServer(onChange: (app: Koa) => void): Promise<Koa> {
+  public async compileDevServer(onChange: (app: Koa) => void): Promise<Koa> {
     const devApp = new Koa();
     const clientConfig = this.webpackConfig[1];
     const middleware = await webpackDevMiddleware({
@@ -95,6 +89,7 @@ export default class Startd {
         }
       },
       devMiddleware: {
+        publicPath: "http://localhost:8080",
         // since we're running the dev server for the client independently of
         // the backend server, we need to specify access control for the request
         // from the original host (3000) to connect to the websocket server (8081)
@@ -103,9 +98,7 @@ export default class Startd {
         },
         logLevel: "silent",
         reporter: () => {
-          // $FlowFixMe https://github.com/webpack/webpack/issues/8356
           webpack(this.webpackConfig, () => {
-            // $FlowFixMe this is the output of webpack, doesn't exist yet
             onChange(require("./server.bundle.js").default);
           });
         }

@@ -22,7 +22,7 @@ jobs:
             - v1-dependencies-
 
       # install dependencies
-      - run: yarn install
+      - run: npm install
 
       - save_cache:
           paths:

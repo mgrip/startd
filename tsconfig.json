@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    // Target latest version of ECMAScript.
+    "target": "esnext",
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // Process & infer types from .js files.
+    "allowJs": true,
+    // Don't emit; allow Babel to transform files.
+    "noEmit": true,
+    // Enable strictest settings like strictNullChecks & noImplicitAny.
+    "strict": true,
+    // ensure single file emit for babel
+    "isolatedModules": true,
+    // Import non-ES modules as default imports.
+    // not sure i need since we're not emitting anything?
+    "esModuleInterop": true,
+    // allow jsx in .tsx files
+    "jsx": "react"
+  },
+  "include": ["**/*.tsx?"],
+  "exclude": ["node_modules"]
+}

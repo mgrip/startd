@@ -1,13 +1,18 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "plugin:flowtype/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/babel",
+    "prettier/react"
   ],
-  "plugins": ["prettier", "jest", "import", "flowtype", "react"],
+  "plugins": ["prettier", "jest", "import", "react", "@typescript-eslint"],
   "root": true,
   "env": {
     "es6": true,
@@ -22,5 +27,8 @@
     "BUNDLE_PATH": false,
     "USE_APP_PROXY": false,
     "DEV_PORT": false
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
 }

@@ -1,5 +1,3 @@
-// @flow strict
-
 import App from "./server.js";
 import http from "http";
 

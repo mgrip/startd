@@ -1,17 +1,13 @@
 #! /usr/bin/env node
-// @flow strict
 
 import path from "path";
 import fs from "fs";
-import http from "http";
-import type { Server } from "http";
-// not sure what's goin on with this libdef but flow is complaining
-// that its not  using flow-strict strict $FlowFixMe
+import http, { Server } from "http";
 import chalk from "chalk";
 import minimist from "minimist";
 import findUp from "find-up";
 import React from "react";
-import ReactCLI, { watchStdout } from "react-cli-renderer";
+import { render } from "ink";
 import Koa from "koa";
 import Cli from "./cli";
 import Startd from "./startd";
@@ -23,51 +19,53 @@ const {
   useProxy
 } = minimist(process.argv.slice(2), { boolean: ["useProxy"] });
 
-export type BuildStatusOptions = "NOTSTARTED" | "WORKING" | "DONE";
-export type BuildStatus = {
-  webpackCompile: BuildStatusOptions,
-  launchServer: BuildStatusOptions,
-  webpackDevCompile: BuildStatusOptions,
-  launchDevServer: BuildStatusOptions
-};
-class StartdServer extends React.Component<
-  {},
-  {
-    inputAppPath: string,
-    appPath?: string,
-    inputMiddlewarePath?: string | boolean,
-    middlewarePath?: string,
-    inputHeaderPath?: string | boolean,
-    headerPath?: string,
-    logs: Array<string>,
-    stdout: Array<string>,
-    server?: Server,
-    devMode: boolean,
-    buildStatus: BuildStatus
-  }
-> {
-  state = {
+export enum BuildStatusOptions {
+  NotStarted,
+  Working,
+  Done
+}
+
+export interface BuildStatus {
+  webpackCompile: BuildStatusOptions;
+  launchServer: BuildStatusOptions;
+  webpackDevCompile: BuildStatusOptions;
+  launchDevServer: BuildStatusOptions;
+}
+
+interface StartdState {
+  inputAppPath: string;
+  appPath?: string;
+  inputMiddlewarePath?: string | boolean;
+  middlewarePath?: string;
+  inputHeaderPath?: string | boolean;
+  headerPath?: string;
+  logs: string[];
+  server?: Server;
+  devMode: boolean;
+  buildStatus: BuildStatus;
+}
+class StartdServer extends React.Component<{}, StartdState> {
+  public state: StartdState = {
     inputAppPath,
     inputMiddlewarePath,
     inputHeaderPath,
     logs: [],
-    stdout: [],
     devMode: process.env.NODE_ENV !== "production",
     buildStatus: {
-      webpackCompile: "NOTSTARTED",
-      launchServer: "NOTSTARTED",
-      webpackDevCompile: "NOTSTARTED",
-      launchDevServer: "NOTSTARTED"
+      webpackCompile: BuildStatusOptions.NotStarted,
+      launchServer: BuildStatusOptions.NotStarted,
+      webpackDevCompile: BuildStatusOptions.NotStarted,
+      launchDevServer: BuildStatusOptions.NotStarted
     }
   };
 
-  addLog(newLog: string): void {
+  public addLog(newLog: string): void {
     this.setState(state => ({
       logs: [newLog, ...state.logs]
     }));
   }
 
-  startServer(koaApp: Koa): void {
+  public startServer(koaApp: Koa): void {
     if (this.state.server) {
       this.state.server.close();
     }
@@ -78,7 +76,7 @@ class StartdServer extends React.Component<
     this.setState({ server });
   }
 
-  async componentDidMount() {
+  public async componentDidMount() {
     const appPath = path.resolve(process.cwd(), this.state.inputAppPath);
     this.setState({ appPath });
     if (!fs.existsSync(appPath)) {
@@ -86,7 +84,7 @@ class StartdServer extends React.Component<
       return;
     }
 
-    let middlewarePath: string | void;
+    let middlewarePath: string | undefined;
     if (this.state.inputMiddlewarePath) {
       if (typeof this.state.inputMiddlewarePath !== "string") {
         // @TODO: maybe prompt to re-enter?
@@ -106,7 +104,7 @@ class StartdServer extends React.Component<
       }
     }
 
-    let headerPath: string | void;
+    let headerPath: string | undefined;
     if (this.state.inputHeaderPath) {
       if (typeof this.state.inputHeaderPath !== "string") {
         // @TODO: maybe prompt to re-enter?
@@ -134,18 +132,14 @@ class StartdServer extends React.Component<
       );
     }
 
-    watchStdout(stdoutLines => {
-      this.setState(prevState => ({
-        stdout: [...prevState.stdout, ...stdoutLines]
-      }));
-    });
-
-    // $FlowFixMe this should already be a bool from minimist
     const startd = new Startd(appPath, useProxy, middlewarePath, headerPath);
 
     this.addLog("Starting webpack compilation...");
     this.setState(prevState => ({
-      buildStatus: { ...prevState.buildStatus, webpackCompile: "WORKING" }
+      buildStatus: {
+        ...prevState.buildStatus,
+        webpackCompile: BuildStatusOptions.Working
+      }
     }));
 
     let koaApp;
@@ -158,18 +152,27 @@ class StartdServer extends React.Component<
     }
     this.addLog(`Webpack comilation ${chalk.green("successful!")}`);
     this.setState(prevState => ({
-      buildStatus: { ...prevState.buildStatus, webpackCompile: "DONE" }
+      buildStatus: {
+        ...prevState.buildStatus,
+        webpackCompile: BuildStatusOptions.Done
+      }
     }));
 
     if (this.state.devMode && koaApp) {
       this.addLog("Launching startd server 🛫");
       this.setState(prevState => ({
-        buildStatus: { ...prevState.buildStatus, launchServer: "WORKING" }
+        buildStatus: {
+          ...prevState.buildStatus,
+          launchServer: BuildStatusOptions.Working
+        }
       }));
       // @TODO: handle webpack fail
       this.startServer(koaApp);
       this.setState(prevState => ({
-        buildStatus: { ...prevState.buildStatus, launchServer: "DONE" }
+        buildStatus: {
+          ...prevState.buildStatus,
+          launchServer: BuildStatusOptions.Done
+        }
       }));
       this.addLog(
         'startd running in dev mode  make sure to add "--prod" flag when running in production'
@@ -178,7 +181,7 @@ class StartdServer extends React.Component<
       this.setState(prevState => ({
         buildStatus: {
           ...prevState.buildStatus,
-          webpackDevCompile: "WORKING"
+          webpackDevCompile: BuildStatusOptions.Working
         }
       }));
       let devApp;
@@ -186,6 +189,12 @@ class StartdServer extends React.Component<
         devApp = await startd.compileDevServer(updatedKoaApp => {
           this.startServer(updatedKoaApp);
         });
+        this.setState(prevState => ({
+          buildStatus: {
+            ...prevState.buildStatus,
+            webpackDevCompile: BuildStatusOptions.Done
+          }
+        }));
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error, "Error compiling your app!");
@@ -195,7 +204,7 @@ class StartdServer extends React.Component<
       this.setState(prevState => ({
         buildStatus: {
           ...prevState.buildStatus,
-          launchDevServer: "DONE"
+          launchDevServer: BuildStatusOptions.Done
         }
       }));
       this.addLog(`dev server launched ${chalk.green("successfully!")}`);
@@ -217,16 +226,15 @@ class StartdServer extends React.Component<
     }
   }
 
-  render() {
+  public render() {
     return (
       <Cli
         devMode={this.state.devMode}
         buildStatus={this.state.buildStatus}
         logs={this.state.logs}
-        stdout={this.state.stdout}
       />
     );
   }
 }
 
-ReactCLI(<StartdServer />);
+render(<StartdServer />);

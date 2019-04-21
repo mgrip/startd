@@ -1,10 +1,10 @@
-// @flow strict
-
 import React from "react";
 import Koa from "koa";
 import serve from "koa-static";
 import { renderToString } from "react-dom/server";
 
+// we need to dynamically import the app module from the user's project
+// eslint-disable-next-line
 const AppModule = require(APP_PATH);
 const App = AppModule.default;
 const app = new Koa();
@@ -19,6 +19,8 @@ app.use(async (ctx, next) => {
 });
 
 if (typeof MIDDLEWARE_PATH !== "undefined") {
+  // we need to dynamically import the app module from the user's project
+  // eslint-disable-next-line
   const MiddlewareModule = require(MIDDLEWARE_PATH);
   app.use(MiddlewareModule.default);
 }
@@ -29,6 +31,8 @@ let headerString = `<head>
 </head>`;
 
 if (typeof HEADER_PATH !== "undefined") {
+  // we need to dynamically import the app module from the user's project
+  // eslint-disable-next-line
   const HeaderModule = require(HEADER_PATH);
   headerString = HeaderModule.default;
 }

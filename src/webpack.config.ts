@@ -1,10 +1,8 @@
-// @flow strict
-
 import path from "path";
-import dirname from "./dirname";
 import webpack from "webpack";
+import dirname from "./dirname";
 
-const baseConfig = {
+const baseConfig: webpack.Configuration = {
   // @TODO: swap this out for production
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
   module: {
@@ -27,7 +25,7 @@ const baseConfig = {
   plugins: [new webpack.IgnorePlugin(/pg-native/, /\/pg\//)]
 };
 
-export default [
+const configs: webpack.Configuration[] = [
   {
     name: "server",
     ...baseConfig,
@@ -61,3 +59,5 @@ export default [
     }
   }
 ];
+
+export default configs;

@@ -11,14 +11,14 @@ const ignorePatterns = [
 module.exports = {
   projects: [
     {
-      displayName: "test",
-      testMatch: ["<rootDir>/**/__tests__/**/*.js"],
+      displayName: "tests",
+      testMatch: ["<rootDir>/**/__tests__/**/*.(js|ts|tsx)"],
       testPathIgnorePatterns: ignorePatterns
     },
     {
       runner: "jest-runner-eslint",
-      displayName: "lint",
-      testMatch: ["<rootDir>/**/*.js"],
+      displayName: "eslint",
+      testMatch: ["<rootDir>/**/*.(js|ts|tsx)"],
       testPathIgnorePatterns: ignorePatterns
     }
   ]
