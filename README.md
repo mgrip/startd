@@ -17,6 +17,15 @@ npx startd app.js
 
 ![Screenshot](startd-example.png)
 
+### Production Usage
+
+```bash
+NODE_ENV=production npx startd app.js
+node server.bundle.js
+```
+
+In production mode, startd will run once and bundle all of your assets into separate server and client bundles. Then to launch your production server, you can just run the `server.bundle.js` file.
+
 ### How it works
 
 _The core pieces of startd are <100 lines of code. If you want to really know how your application works, go take a look!_
