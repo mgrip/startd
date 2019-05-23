@@ -15,7 +15,6 @@ import Startd from "./startd";
 const {
   _: [inputAppPath],
   middleware: inputMiddlewarePath,
-  header: inputHeaderPath,
   useProxy
 } = minimist(process.argv.slice(2), { boolean: ["useProxy"] });
 
@@ -37,8 +36,6 @@ interface StartdState {
   appPath?: string;
   inputMiddlewarePath?: string | boolean;
   middlewarePath?: string;
-  inputHeaderPath?: string | boolean;
-  headerPath?: string;
   logs: string[];
   server?: Server;
   devMode: boolean;
@@ -48,7 +45,6 @@ class StartdServer extends React.Component<{}, StartdState> {
   public state: StartdState = {
     inputAppPath,
     inputMiddlewarePath,
-    inputHeaderPath,
     logs: [],
     devMode: process.env.NODE_ENV !== "production",
     buildStatus: {
@@ -104,26 +100,6 @@ class StartdServer extends React.Component<{}, StartdState> {
       }
     }
 
-    let headerPath: string | undefined;
-    if (this.state.inputHeaderPath) {
-      if (typeof this.state.inputHeaderPath !== "string") {
-        // @TODO: maybe prompt to re-enter?
-        this.addLog(`Input header path is not a string`);
-        return;
-      }
-      headerPath = path.resolve(
-        process.cwd(),
-        // $FlowFixMe flow isn't picking up the check above
-        this.state.inputHeaderPath
-      );
-      this.setState({ headerPath });
-      this.addLog(`Using ${headerPath} html header`);
-      if (!fs.existsSync(headerPath)) {
-        this.addLog(`${headerPath} is not a valid filepath`);
-        return;
-      }
-    }
-
     if (!findUp.sync(".babelrc", { cwd: path.dirname(appPath) })) {
       this.addLog(
         "Looks like you don't have a .babelrc file set up for your app. " +
@@ -132,7 +108,7 @@ class StartdServer extends React.Component<{}, StartdState> {
       );
     }
 
-    const startd = new Startd(appPath, useProxy, middlewarePath, headerPath);
+    const startd = new Startd(appPath, useProxy, middlewarePath);
 
     this.addLog("Starting webpack compilation...");
     this.setState(prevState => ({
