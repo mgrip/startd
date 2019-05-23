@@ -6,9 +6,20 @@ import { hydrate } from "react-dom";
 const App = require(APP_PATH).default;
 const HotApp = hot(module)(App);
 
-document.addEventListener("DOMContentLoaded", () => {
+function init() {
   const rootElement = document.getElementById("root");
   if (rootElement) {
     hydrate(<HotApp ctx={{}} startd={window.startd} />, rootElement);
   }
-});
+}
+if (
+  document.readyState === "complete" ||
+  document.readyState === "interactive"
+) {
+  // document has at least been parsed
+  init();
+} else {
+  document.addEventListener("DOMContentLoaded", () => {
+    init();
+  });
+}
