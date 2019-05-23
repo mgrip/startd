@@ -49,7 +49,7 @@ app.use(async ctx => {
       <script type="text/javascript">
         window.startd = ${JSON.stringify(ctx.state.startd)};
       </script>
-      <script type="text/javascript" src="${bundlePath}"></script>
+      <script type="text/javascript" src="${bundlePath}" async></script>
       <body>
         <div id="root">${appMarkup}</div>
       </body>
