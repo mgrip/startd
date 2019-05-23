@@ -45,6 +45,7 @@ app.use(async ctx => {
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
         ${helmet.link.toString()}
+        ${helmet.style.toString()}
       </head>
       <script type="text/javascript">
         window.startd = ${JSON.stringify(ctx.state.startd)};
