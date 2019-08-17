@@ -30,7 +30,6 @@ const configs: webpack.Configuration[] = [
     name: "server",
     ...baseConfig,
     entry: [
-      "@babel/polyfill",
       path.resolve(
         dirname(),
         process.env.NODE_ENV === "production" ? "runServer" : "server.js"
@@ -49,7 +48,7 @@ const configs: webpack.Configuration[] = [
   {
     name: "client",
     ...baseConfig,
-    entry: ["@babel/polyfill", path.resolve(dirname(), "client.js")],
+    entry: [path.resolve(dirname(), "client.js")],
     output: {
       filename: "app.bundle.js",
       path: path.resolve(

@@ -11,7 +11,7 @@ startd is a [toolbox](https://youtu.be/G39lKaONAlA?t=1398) 🛠📦 to help you 
 _note: startd uses webpack+babel to compile your app. By default it will use the [react babel preset](https://babeljs.io/docs/plugins/preset-react/), but if you want to add other transpile options you can create a .babelrc file in your app directory_
 
 ```bash
-npm install --save startd-server
+npm install --save startd-server react react-dom react-helmet
 npx startd app.js
 ```
 

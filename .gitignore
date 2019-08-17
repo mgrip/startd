@@ -7,9 +7,10 @@
 
 # webpack output
 /public
-/lib/public
 /server.bundle.js
-/lib/server.bundle.js
+
+# babel output
+/lib
 
 # misc
 .DS_Store

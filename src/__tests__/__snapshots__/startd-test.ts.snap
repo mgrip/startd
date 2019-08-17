@@ -4,7 +4,6 @@ exports[`startd should correctly generate a webpack config from an input path 1`
 Array [
   Object {
     "entry": Array [
-      "@babel/polyfill",
       "/TEST_DIRNAME/server.js",
     ],
     "mode": "development",
@@ -63,7 +62,6 @@ Array [
   },
   Object {
     "entry": Array [
-      "@babel/polyfill",
       "/TEST_DIRNAME/client.js",
     ],
     "mode": "development",
@@ -122,7 +120,6 @@ exports[`startd should correctly generate a webpack config from an input path 2`
 Array [
   Object {
     "entry": Array [
-      "@babel/polyfill",
       "/TEST_DIRNAME/server.js",
     ],
     "mode": "development",
@@ -182,7 +179,6 @@ Array [
   },
   Object {
     "entry": Array [
-      "@babel/polyfill",
       "/TEST_DIRNAME/client.js",
     ],
     "mode": "development",

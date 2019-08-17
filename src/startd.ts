@@ -54,6 +54,7 @@ export default class Startd {
       webpack(this.webpackConfig, (err, multiStats) => {
         if (err || multiStats.hasErrors()) {
           // Handle errors here
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
           // @ts-ignore webpack stats type is wrong
           multiStats.stats.forEach(stats => {
             if (stats.hasErrors()) {
