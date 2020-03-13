@@ -58,7 +58,7 @@
     "koa": "^2.6.1",
     "koa-static": "^5.0.0",
     "koa-webpack": "^5.2.4",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "react-hot-loader": "^4.12.11",
     "webpack": "^4.39.2"
   },
